@@ -1,0 +1,31 @@
+{
+  "name": "innovate_ai",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000i\u0000n\u0000n\u0000o\u0000v\u0000a\u0000t\u0000e\u0000_\u0000a\u0000i\u0000\r\u0000 \u0000",
+  "main": "app.js",
+  "type":"module",
+  "scripts": {
+    "start":"node server.js",
+    "dev":"nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aniket-kes/innovate_ai.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cloudinary": "^2.1.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-fileupload": "^1.5.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.3.0",
+    "validator": "^13.11.0"
+  }
+}
+
