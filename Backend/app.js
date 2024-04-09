@@ -4,16 +4,15 @@ import cors from "cors";
 import {config} from "dotenv";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
-import messageRouter from "./router/messageRouter.js";
-import userRouter from "./router/userRouter.js";
 import { errorMiddleware } from "./middlewares/error.js";
-
+import messageRouter from "./router/messageRouter.js";
+import userRouter from "./router/userRouter.js"
 const app=express();
 config({ path: "./config.env" });
 
 app.use(
     cors({
-      origin: process.env.FRONTEND_URL,
+      origin: [process.env.FRONTEND_URL],
       method: ["GET", "POST", "DELETE", "PUT"],
       credentials: true,
     })

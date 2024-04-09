@@ -25,11 +25,14 @@ export const userRegister=catchAsyncErrors(async(req,res,next)=>{
         lastName,
         email,
         password,
+        role:"User",
     });
     
     generateToken(user,"User Registered",200,res);
 
 });
+
+// login
 
 export const login = catchAsyncErrors(async (req, res, next) => {
     const{email,password,confirmPassword}=req.body;
@@ -53,6 +56,38 @@ export const login = catchAsyncErrors(async (req, res, next) => {
 
 });
 
+// adding new admin
+export const addNewAdmin = catchAsyncErrors(async (req, res, next) => {
+    const { firstName, lastName, email, password } =
+      req.body;
+    if (
+      !firstName ||
+      !lastName ||
+      !email ||
+      !password
+    ) {
+      return next(new ErrorHandler("Please Fill Full Form!", 400));
+    }
+    const isRegistered=await User.findOne({email});
+    if(isRegistered){
+        return next(new ErrorHandler("Admin With This Email Already Exists!", 400));
+    }
+
+    const admin=await User.create({
+    firstName,
+    lastName,
+    email,
+    password,
+    role:"Admin",
+
+    });
+    res.status(200).json({
+        success: true,
+        message: "New Admin Registered",
+        admin,
+      });
+});
+
 // for getting user details
 export const getUserDetails=catchAsyncErrors(async(req,res,next)=>{
     const user=req.user;
@@ -62,7 +97,7 @@ export const getUserDetails=catchAsyncErrors(async(req,res,next)=>{
     });
 });
 
-// logout function
+// logout function for user
 export const logoutUser=catchAsyncErrors(async(req,res,next)=>{
     res
     .status(201)
@@ -75,3 +110,16 @@ export const logoutUser=catchAsyncErrors(async(req,res,next)=>{
         message: "User Logged Out Successfully.",
       });
 });
+// logout function for admin
+export const logoutAdmin = catchAsyncErrors(async (req, res, next) => {
+    res
+      .status(201)
+      .cookie("adminToken", "", {
+        httpOnly: true,
+        expires: new Date(Date.now()),
+      })
+      .json({
+        success: true,
+        message: "Admin Logged Out Successfully.",
+      });
+  });
