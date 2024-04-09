@@ -4,6 +4,9 @@ import cors from "cors";
 import {config} from "dotenv";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
+import messageRouter from "./router/messageRouter.js";
+import userRouter from "./router/userRouter.js";
+import { errorMiddleware } from "./middlewares/error.js";
 
 const app=express();
 config({ path: "./config.env" });
@@ -27,6 +30,11 @@ app.use(
     })
 );
 
+app.use("/api/v1/message",messageRouter);
+app.use("/api/v1/user",userRouter);
+
 dbConnection();
+
+app.use(errorMiddleware);
 
 export default app;

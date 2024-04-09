@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
+import validator from "validator";
 
-const messageSchema=new mongoose.model({
+const messageSchema=new mongoose.Schema({
     firstName: {
         type: String,
         required: true,
@@ -23,5 +24,6 @@ const messageSchema=new mongoose.model({
       },
 });
 
-export const Message=mongoose.model("Message",messageSchema);
+mongoose.model
+export const Message=("Message",messageSchema);
 
