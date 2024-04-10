@@ -6,7 +6,6 @@ import Header from "./pages/Header";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import DashBoard from "./pages/DashBoard";
 import Rules from "./pages/Rules";
 import Chat from "./pages/Chat";
 
@@ -23,7 +22,7 @@ function App() {
               <Route path="/" element={<Header />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-              {/* <Route path="/dashboard" element={<DashBoard />} /> */}
+             
               <Route path="/rules" element={<Rules />} />
               <Route path="/chat" element={<Chat />} />
             </Routes>
