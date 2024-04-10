@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Context } from "../main";
+import { Context } from "../main.jsx";
 import { Navigate, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -69,6 +69,8 @@ const AddNewAdmin = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
+            </div>
+            <div>
               <input
               type="password"
               placeholder="Password"
@@ -84,4 +86,4 @@ const AddNewAdmin = () => {
     </section>
   );
 };
-export default AddNewAdmin;
+export default  AddNewAdmin;

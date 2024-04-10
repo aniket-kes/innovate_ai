@@ -5,7 +5,7 @@ import ai from '../assets/ai.png'
 
 function Header() {
   const handleOnclick = () => {
-    window.location.href = '/chat'
+    window.location.href = '/Login'
   }
   return (
     <div className='gpt3__header' id='home'>
@@ -14,7 +14,7 @@ function Header() {
         <p>Get instant answers on any topic, powered by people like you.</p>
         <div className='gpt3__header-content__input'>
           {/* <input type="email" placeholder='Your email address' /> */}
-          <button className='gpt3__header-button' type='button' onClick={handleOnclick} >Get Started</button>
+          <button className='gpt3__header-button' type='button' onClick={handleOnclick} >Start Searching</button>
         </div>
         {/* <div className='gpt3__header-content__people'>
           <img src= { people } alt="people" />
