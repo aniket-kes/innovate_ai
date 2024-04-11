@@ -3,6 +3,21 @@ import validator from "validator";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+const chatSchema = new mongoose.Schema({
+    id: {
+      type: String,
+      default: randomUUID(),
+    },
+    role: {
+      type: String,
+      required: true,
+    },
+    content: {
+      type: String,
+      required: true,
+    },
+});
+
 const userSchema=new mongoose.Schema({
     firstName:{
         type:String,
@@ -29,7 +44,8 @@ const userSchema=new mongoose.Schema({
       type: String,
       required: [true, "User Role Required!"],
       enum: ["User","Admin"],
-    }
+    },
+    chats: [chatSchema],
 });
 userSchema.pre("save", async function (next) {
     if (!this.isModified("password")) {
