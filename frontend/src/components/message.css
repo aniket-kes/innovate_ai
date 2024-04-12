@@ -1,0 +1,15 @@
+.msg-wrapper {
+    display: grid;
+    grid-template-columns: 60px auto;
+    min-height: 60px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background-color: #1b1b1d;
+  }
+  
+  .msg-avatar {
+    width: 40px;
+    height: 40px;
+  }
+  

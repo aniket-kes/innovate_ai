@@ -1,0 +1,14 @@
+.cl-wrapper {
+    width: 100%;
+    height: 60px;
+    background-color: #ff9d84;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .cl-wrapper:hover {
+    cursor: pointer;
+    background-color: #ff886b;
+  }

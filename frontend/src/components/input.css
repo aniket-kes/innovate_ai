@@ -1,0 +1,30 @@
+.ip-wrapper {
+    display: grid;
+    grid-template-columns: auto 100px;
+    height: 60px;
+    border-radius: 10px;
+    background-color: #323236;
+  }
+  
+  .ip-text {
+    border: none;
+    outline: none;
+    background: none;
+    padding: 20px;
+    color: white;
+    font-size: 16px;
+  }
+  
+  .ip-btn {
+    border: none;
+    border-radius: 0 10px 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: rgb(218, 255, 170);
+  }
+  
+  .ip-btn:hover {
+    cursor: pointer;
+    background-color: rgb(200, 253, 130);
+  }
+  
