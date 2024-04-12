@@ -30,6 +30,7 @@ const Login = () => {
         setEmail("");
         setPassword("");
         setConfirmPassword("");
+        console.log(isAuthenticated);
       });
     } catch (error) {
         toast.error(error.response.data.message);

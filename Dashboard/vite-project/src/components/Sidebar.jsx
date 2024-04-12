@@ -40,26 +40,25 @@ const Sidebar = () => {
     navigateTo("/admin/addnew");
     setShow(!show);
   };
+  
   return (
     <>
-      <nav
-        style={!isAuthenticated ? { display: "none" } : { display: "flex" }}
-        className={show ? "show sidebar" : "sidebar"}
-      >
-        <div className="links">
-          <TiHome onClick={gotoHomePage} />
-          <MdAddModerator onClick={gotoAddNewAdmin} />
-          <AiFillMessage onClick={gotoMessagesPage} />
-          <RiLogoutBoxFill onClick={handleLogout} />
+      {isAuthenticated && (
+        <nav className={show ? "show sidebar" : "sidebar"}>
+          <div className="links">
+            <TiHome onClick={gotoHomePage} />
+            <MdAddModerator onClick={gotoAddNewAdmin} />
+            <AiFillMessage onClick={gotoMessagesPage} />
+            <RiLogoutBoxFill onClick={handleLogout} />
           </div>
-          </nav>
-          <div  className="wrapper"
-        style={!isAuthenticated ? { display: "none" } : { display: "flex" }}
-      >
-         <GiHamburgerMenu className="hamburger" onClick={() => setShow(!show)} />
-
-          </div>
-          </>
+        </nav>
+      )}
+      {isAuthenticated && (
+        <div className="wrapper" style={{ display: "flex" }}>
+          <GiHamburgerMenu className="hamburger" onClick={() => setShow(!show)} />
+        </div>
+      )}
+    </>
   );
 };
 

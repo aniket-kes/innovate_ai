@@ -2,10 +2,22 @@ import React from 'react'
 import './header.css'
 // import people from '../../assets/people.png'
 import ai from '../assets/ai.png'
+import { Context } from '../main'
+import { useNavigate } from 'react-router-dom'
 
 function Header() {
+  const { isAuthenticated } = React.useContext(Context)
+  const navigateTo = useNavigate();
+
+  const islogin = localStorage.getItem('islogin')
   const handleOnclick = () => {
-    window.location.href = '/chat'
+    if(isAuthenticated) {
+      navigateTo("/chat")
+      console.log('isAuthenticated', isAuthenticated);
+    }
+    else{
+      window.location.href = '/login'  
+    }
   }
   return (
     <div className='gpt3__header' id='home'>
