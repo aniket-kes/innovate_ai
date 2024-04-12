@@ -16,7 +16,7 @@ a {
 }
 
 .gradient__bg{
-
+    min-height: 100vh;
     /* ff 3.6+ */
     background:-moz-radial-gradient(circle at 3% 25%, rgba(15, 29, 92, 1) 0%, rgba(0, 0, 0, 1) 100%);
 
