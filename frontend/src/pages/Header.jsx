@@ -19,6 +19,7 @@ function Header() {
       window.location.href = '/login'  
     }
   }
+  
   return (
     <div className='gpt3__header' id='home'>
       <div className='gpt3__header-content'>
