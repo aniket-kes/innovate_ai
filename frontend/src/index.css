@@ -5,6 +5,31 @@
   padding: 0;
   --font-family: 'Manrope', sans-serif;
 
+  ::-webkit-scrollbar-thumb,
+  ::-webkit-scrollbar-track { 
+      width: 8px;
+      border: none;
+      background: transparent;
+  }
+
+  ::-webkit-scrollbar-button,
+  ::-webkit-scrollbar-track-piece,
+  ::-webkit-scrollbar-corner,
+  ::-webkit-resizer {
+      display: none;
+  }
+
+  ::-webkit-scrollbar-thumb {
+      border-radius: 6px;
+      background-color: #1A5FAC;
+  }
+
+  ::-webkit-scrollbar-track {
+      background-image: url("https://i.imgur.com/GvV1R30.png");
+      background-repeat: repeat-y;
+      background-size: contain;
+  }
+
   --gradient-text: linear-gradient(89.97deg, #AE67FA 1.84%, #F49867 102.67%);
   --gradient-bar: linear-gradient(103.22deg, #AE67FA -13.86%, #F49867 99.55%);
   
@@ -14,5 +39,8 @@
   --color-text: #81AFDD;
   --color-subtext: #FF8A71;
 
-/*  overflow: hidden; */
+  /* overflow: hidden; */
+  /*  overflow: hidden; */
+
+  
 }

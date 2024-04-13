@@ -1,0 +1,12 @@
+.hi-wrapper {
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background-color: #1b1b1d;
+  }
+  
+  .hi-wrapper:hover {
+    cursor: pointer;
+    background-color: #323236;
+  }
+  

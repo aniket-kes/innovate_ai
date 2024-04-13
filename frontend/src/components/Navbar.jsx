@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { RiMenu3Line, RiCloseLine } from 'react-icons/ri'
 import './navbar.css'
 import logo from '../assets/logo.png';
+import { Context } from '../main';
 
 // const Menu= () => {
 //   <>
@@ -15,6 +16,7 @@ import logo from '../assets/logo.png';
 // }
 
 function Navbar() {
+  const { isAuthenticated } = React.useContext(Context)
   const [ toggleMenu, setToggleMenu ] = useState(false);
   return (
     <div className='gpt3__navbar'>
@@ -24,15 +26,24 @@ function Navbar() {
         </div>
         <div className='gpt3__navbar-links_container'> 
           <p><a href="/">Home</a></p>
-          <p><a href="/login">Innvoate Ai?</a></p>
+          <p><a href="http://localhost:5174/">Dashboard</a></p>
           <p><a href="/rules">Rules & regulation</a></p>
           <p><a href="#features"></a></p>
           <p><a href="#blog"></a></p>
         </div>
       </div>
       <div className='gpt3__navbar-sign'>
-        <a href="/login"><p>Sign in</p></a>
-        <a href="/signup"><button type='button' >Sign up</button></a>
+      {!isAuthenticated &&
+          <>
+            <a href="/login"><p>Sign in</p></a>
+            <a href="/signup"><button type='button' >Sign up</button></a>
+          </>
+        }
+        {isAuthenticated &&
+          <>
+            <a href="/"><button type='button' >Logout</button></a>
+          </>
+        }
       </div>
       <div className='gpt3__navbar-menu'>
       { toggleMenu
