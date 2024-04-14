@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { RiMenu3Line, RiCloseLine } from 'react-icons/ri'
 import './navbar.css'
 import logo from '../assets/logo.png';
-import { Context } from '../main';
+import { Context } from '../main'
 
 // const Menu= () => {
 //   <>
@@ -18,6 +18,11 @@ import { Context } from '../main';
 function Navbar() {
   const { isAuthenticated } = React.useContext(Context)
   const [ toggleMenu, setToggleMenu ] = useState(false);
+  const loggedInUser = localStorage.getItem("user");
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    window.location.href = '/login'
+  }
   return (
     <div className='gpt3__navbar'>
       <div className='gpt3__navbar-links'>
@@ -26,22 +31,22 @@ function Navbar() {
         </div>
         <div className='gpt3__navbar-links_container'> 
           <p><a href="/">Home</a></p>
-          <p><a href="http://localhost:5174/">Dashboard</a></p>
+          <p><a href="http://localhost:5174">Dashboard</a></p>
           <p><a href="/rules">Rules & regulation</a></p>
           <p><a href="#features"></a></p>
           <p><a href="#blog"></a></p>
         </div>
       </div>
       <div className='gpt3__navbar-sign'>
-      {!isAuthenticated &&
+      {!loggedInUser &&
           <>
             <a href="/login"><p>Sign in</p></a>
             <a href="/signup"><button type='button' >Sign up</button></a>
           </>
         }
-        {isAuthenticated &&
+        {loggedInUser &&
           <>
-            <a href="/"><button type='button' >Logout</button></a>
+            <a href="/"><button type='button' onClick={handleLogout} >Logout</button></a>
           </>
         }
       </div>

@@ -12,7 +12,7 @@ import { isAdminAuthenticated, isUserAuthenticated } from "../middlewares/auth.j
 
 const router=express.Router();
 
-router.post("/user/register",userRegister);
+router.post("   ",userRegister);
 router.post("/login",login);
 router.post("/admin/addnew",isAdminAuthenticated,addNewAdmin);
 router.get("/user/me",isUserAuthenticated,getUserDetails);
