@@ -6,30 +6,34 @@ import { Navigate } from "react-router-dom";
 
 const Messages = () => {
   const [messages, setMessages] = useState([]);
-  const { isAuthenticated } = useContext(Context);
+  const [users, setUsers] = useState([]);
+  
   useEffect(() => {
     const fetchMessages = async () => {
       try {
         const { data } = await axios.get(
             "http://localhost:7000/api/v1/user/user/me",
-            {withCredentials:true}
+            {withCredentials:true, headers:{ "Content-Type": "application/json"}}
         );
-        setMessages(data.messages);
-    }catch(error){
-        console.log(error.response.data.message);
-    }
-};
-fetchMessages();
-}, []);
-if (!isAuthenticated) {
-    return <Navigate to={"/login"} />;
-  }
+        console.log(data);
+        setUsers(data.user);
+        console.log(users);
+        // setMessages(data.messages);
+      }catch(error){
+          console.log(error.message);
+      }
+    };
+  fetchMessages();
+  }, []);
+  // if (!isAuthenticated) {
+  //   return <Navigate to={"/login"} />;
+  // }
   return (
     <section className="page messages">
         <h1>MESSAGE</h1>
         <div className="banner">
-        {messages && messages.length > 0 ? (
-          messages.map((element) => {
+        {users ? (
+          users.map((element) => {
             return (
               <div className="card" key={element._id}>
                 <div className="details">
@@ -43,10 +47,10 @@ if (!isAuthenticated) {
                     Email: <span>{element.email}</span>
                   </p>
                   <p>
-                    Message: <span>[{element.message}]</span>
+                    Message: <span>{element.message}</span>
                   </p>
                 </div>
-                </div>
+              </div>
             );
           })
         ):(

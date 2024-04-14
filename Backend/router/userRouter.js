@@ -27,6 +27,4 @@ router.get("/allchats",isUserAuthenticated,sendChatsToUser);
 router.delete("/delete",isUserAuthenticated,deleteChats);
 
 
-
-
 export default router;

@@ -92,11 +92,13 @@ export const addNewAdmin = catchAsyncErrors(async (req, res, next) => {
 
 // for getting user details
 export const getUserDetails=catchAsyncErrors(async(req,res,next)=>{
-    const user=await User.find();
-    res.status(200).json({
-        success:true,
-        user,
-    });
+      const user=await User.find();
+      res.status(200).json({
+          success:true,
+          user,
+      });
+      // console.log(user);
+      // console.log();
 });
 
 // logout function for user
