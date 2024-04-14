@@ -69,7 +69,7 @@ export default function Chat() {
           onChange={(e) => setInput(e.target.value)}
           onClick={input ? handleSubmit : undefined}
         />
-      </div>
+      </div>  
       <div className="Column">
         <h3 className="Title">History</h3>
         <div className="Content">
