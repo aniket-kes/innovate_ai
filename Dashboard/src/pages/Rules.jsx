@@ -46,8 +46,23 @@ function Rules() {
     //['file1','file2']
     //[['Rule1','Rule2','Rule3'],['Rule1','Rule2']]
     print(totalrules)
+    // console.log(totalrules)
+    // console.log(fileName)
     setfileName(fileName)
     setRules(totalrules)
+
+    var data = {"totalrules":totalrules,"filenames":fileName}
+    const response2 = await fetch('http://127.0.0.1:5001/storerules', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      }).then(response => response.json())
+      .then(result => {
+        console.log(result); 
+        })
+
     // let pdftext = ""
     // const file = event.target.files[0]
     // console.log(file)

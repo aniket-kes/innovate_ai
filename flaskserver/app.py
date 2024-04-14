@@ -171,5 +171,30 @@ def chatquery(text):
     answer = llm_chain.run(question=que)
     return answer
 
+totalrules = []
+filenames = []
+
+@app.route('/storerules',methods=['POST'])
+def storerules():
+    global totalrules,filenames
+    print('store rules entered')
+    data = request.get_json(force=True)
+    totalrules = data['totalrules']
+    filenames = data['filenames']
+
+    print(filenames)
+    results = "Data stored at flask"
+    return jsonify(results), 200, {'Content-Type':'application/json'}
+
+@app.route('/gettherules',methods=['POST'])
+def gettherules():
+    global totalrules,filenames
+    print('get the rules entered')
+    data = request.get_json(force=True)
+
+    results = {"totalrules":totalrules,"filenames":filenames}
+    return jsonify(results), 200, {'Content-Type':'application/json'}
+
+
 if __name__=='__main__':
     app.run(host='0.0.0.0',port=5001,debug=True)
