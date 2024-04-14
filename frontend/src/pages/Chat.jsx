@@ -13,27 +13,133 @@ export default function Chat() {
   const [history, setHistory] = useState([]);
 
   const handleSubmit = async () => {
-    const prompt = {
-      role: "user",
-      content: input
-    };
+    let sc = 0
 
-    setMessages([...messages, prompt]);
-
-    await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        model: "gpt-3.5-turbo",
-        messages: [...messages, prompt]
-      })
+    try{
+      var data = {"text":input}
+      const responseforscore = await fetch('http://127.0.0.1:5001/riskscore', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+        }).then(response => response.json())
+        .then(result => {
+        console.log(result); 
+        const prompt = {
+          role: "user",
+          score:result,
+          // role:"assistant",
+          content: input
+        };
+        setMessages([...messages, prompt]);
+        setInput("")
     })
-      .then((data) => data.json())
-      .then((data) => {
-        console.log(data);
+    }
+    catch(error){
+      console.log("Error:",error)
+      const prompt = {
+        role: "user",
+        score:100,
+        // role:"assistant",
+        content: input
+      };
+      setMessages([...messages, prompt]);
+    }
+
+    var chat=""
+    var data = {"text":input}
+    const response = await fetch('http://127.0.0.1:5001/filtertext', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+        }).then(response => response.json())
+        .then(result => {
+          console.log(result); 
+          chat = result;
+        // setMessages((messages) => [
+        //   ...messages,
+        //   {
+        //     role: "assistant",
+        //     score:0,
+        //     content: result
+        //   }
+        // ]);
+    })
+
+    //llmquery
+    var llmresponse = ""
+    try{
+      var data = {"text":chat}
+      const responseforscore3 = await fetch('http://127.0.0.1:5001/llmanswer', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+        }).then(response => response.json())
+        .then(result3 => {
+        console.log(result3); 
+        llmresponse = result3
+    })
+    }
+    catch(error){
+      console.log("Error:",error)
+    }
+
+
+    try{
+      var data = {"text":chat}
+      const responseforscore2 = await fetch('http://127.0.0.1:5001/riskscore', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+        }).then(response => response.json())
+        .then(result2 => {
+        console.log(result2); 
+         setMessages((messages) => [
+          ...messages,
+          {
+            role: "assistant",
+            score:result2,
+            content: chat,
+            llmres:llmresponse
+          }
+        ]);
+      
+    })
+    }
+    catch(error){
+      console.log("Error:",error)
+      const reschat = {
+        role: "assistant",
+        score:0,
+        // role:"assistant",
+        content: chat,
+        llmres:llmresponse
+      };
+      setMessages([...messages, reschat]);
+    }
+    // setHistory(messages)
+
+    // await fetch("https://api.openai.com/v1/chat/completions", {
+    //   method: "POST",
+    //   headers: {
+    //     Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
+    //     "Content-Type": "application/json"
+    //   },
+    //   body: JSON.stringify({
+    //     model: "gpt-3.5-turbo",
+    //     messages: [...messages, prompt]
+    //   })
+    // })
+    //   .then((data) => data.json())
+    //   .then((data) => {
+    //     console.log(data);
         // const res = data.choices[0].message.content;
         // setMessages((messages) => [
         //   ...messages,
@@ -44,9 +150,12 @@ export default function Chat() {
         // ]);
         // setHistory((history) => [...history, { question: input, answer: res }]);
         // setInput("");
-      });
+     // });
   };
 
+   {/* <div key={i}>
+                <p>Text Risk Score: {el.score}</p> */}
+                 {/* </div> */}
   const clear = () => {
     setMessages([]);
     setHistory([]);
@@ -58,8 +167,19 @@ export default function Chat() {
         <h3 className="Title">Chat Messages</h3>
         <div className="Content">
           {messages.map((el, i) => {
-            return <Message key={i} role={el.role} content={el.content} />;
-          })}
+            return (
+              <div key={i}>
+                <p>Text Risk Score: {el.score}%</p>
+                
+                <Message role={el.role} content={el.content} />
+               <b><i>
+                {el.llmres? <Message role={el.role} content={el.llmres} /> : <br></br>}
+                </i></b>
+              </div> 
+              );
+
+          })
+          }
         </div>
         <Input
           value={input}
@@ -67,7 +187,7 @@ export default function Chat() {
           onClick={input ? handleSubmit : undefined}
         />
       </div>
-      <div className="Column">
+      {/* <div className="Column">
         <h3 className="Title">History</h3>
         <div className="Content">
           {history.map((el, i) => {
@@ -86,7 +206,7 @@ export default function Chat() {
           })}
         </div>
         <Clear onClick={clear} />
-      </div>
+      </div> */}
     </div>
   );
 }
