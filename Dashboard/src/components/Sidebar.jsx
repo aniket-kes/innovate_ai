@@ -58,14 +58,14 @@ const Sidebar = () => {
           <MdRule onClick={gotoRulePage}/>
           <RiLogoutBoxFill onClick={handleLogout} />
           </div>
-          </nav>
-          <div  className="wrapper"
-        style={!isAuthenticated ? { display: "none" } : { display: "flex" }}
-      >
-         <GiHamburgerMenu className="hamburger" onClick={() => setShow(!show)} />
-
-          </div>
-          </>
+        </nav>
+      
+      {isAuthenticated && (
+        <div className="wrapper" style={{ display: "flex" }}>
+          <GiHamburgerMenu className="hamburger" onClick={() => setShow(!show)} />
+        </div>
+      )}
+    </>
   );
 };
 

@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { React, useState } from "react";
+import { Context } from "../main";
 
 import Message from "../components/Message";
 import Input from "../components/Input";
 import History from "../components/History";
 import Clear from "../components/Clear";
+
+import axios from "axios";
 
 import "./chat.css";
 
@@ -11,6 +14,8 @@ export default function Chat() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [history, setHistory] = useState([]);
+
+  //const auth = React.useContext(Context);
 
   const handleSubmit = async () => {
     let sc = 0
@@ -159,6 +164,25 @@ export default function Chat() {
   const clear = () => {
     setMessages([]);
     setHistory([]);
+  };
+  
+
+  const sendChatRequest = async (role, message) => {
+    const res = 
+      await axios
+        .post(
+          "http://localhost:7000/api/v1/user/new",
+          { id:"", role, message},
+          {
+            withCredentials: true,
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+        if (res.status !== 200) {
+          throw new Error("Unable to send chat");
+        }
+        const data = await res.data;
+        return data;
   };
 
   return (

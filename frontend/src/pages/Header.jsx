@@ -3,15 +3,28 @@ import './header.css'
 // import people from '../../assets/people.png'
 import ai from '../assets/ai.png'
 import { Context } from '../main'
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 function Header() {
   const { isAuthenticated } = React.useContext(Context)
   const navigateTo = useNavigate();
 
-  const islogin = localStorage.getItem('islogin')
+  const loggedInUser = localStorage.getItem("user");
+  // useEffect(() => {
+  //   const loggedInUser = localStorage.getItem("user");
+  //   if (loggedInUser) {
+  //     navigateTo("/chat");
+  //   }
+  //   else 
+  //   {
+  //     navigateTo("/login");
+  //   }
+  // }, []); 
+
+
+  // const islogin = localStorage.getItem('user')
   const handleOnclick = () => {
-    if(isAuthenticated) {
+    if(isAuthenticated || loggedInUser) {
       navigateTo("/chat")
       console.log('isAuthenticated', isAuthenticated);
     }
