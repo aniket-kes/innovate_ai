@@ -40,7 +40,9 @@ function Header() {
         <p>Get instant answers on any topic, powered by people like you.</p>
         <div className='gpt3__header-content__input'>
           {/* <input type="email" placeholder='Your email address' /> */}
+          
           <button className='gpt3__header-button' type='button' onClick={handleOnclick} >Get Started</button>
+          
         </div>
         {/* <div className='gpt3__header-content__people'>
           <img src= { people } alt="people" />

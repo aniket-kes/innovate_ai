@@ -18,7 +18,7 @@ const router=express.Router();
 router.post("   ",userRegister);
 router.post("/login",login);
 router.post("/admin/addnew",isAdminAuthenticated,addNewAdmin);
-router.get("/user/me",isUserAuthenticated,getUserDetails);
+router.get("/user/me",isAdminAuthenticated,getUserDetails);
 router.get("/admin/me",isAdminAuthenticated,getUserDetails);
 router.get("/user/logout",isUserAuthenticated,logoutUser);
 router.get("/admin/logout",isAdminAuthenticated,logoutAdmin);

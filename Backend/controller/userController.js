@@ -92,7 +92,7 @@ export const addNewAdmin = catchAsyncErrors(async (req, res, next) => {
 
 // for getting user details
 export const getUserDetails=catchAsyncErrors(async(req,res,next)=>{
-    const user=req.user;
+    const user=await User.find();
     res.status(200).json({
         success:true,
         user,
@@ -163,13 +163,13 @@ export const logoutAdmin = catchAsyncErrors(async (req, res, next) => {
     }
   });
   // sends chat to user
-  export const sendChatsToUser = async (req, res, next) => {
+  export const sendChatsToUser = catchAsyncErrors(async (req, res, next) => {
     try {
       //user token check
       const user = req.user;
     // const user=localStorage.getItem("user");
       
-      console.log(user);
+     // console.log(user);
       if (!user) {
         return res.status(401).send("User not registered OR Token malfunctioned");
       }
@@ -181,7 +181,7 @@ export const logoutAdmin = catchAsyncErrors(async (req, res, next) => {
       console.log(error);
       return res.status(200).json({ message: "ERROR", cause: error.message });
     }
-  };
+  });
   // delete chats
   export const deleteChats = async (req, res, next) => {
     try {

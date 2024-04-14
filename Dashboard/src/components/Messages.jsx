@@ -11,7 +11,7 @@ const Messages = () => {
     const fetchMessages = async () => {
       try {
         const { data } = await axios.get(
-            "http://localhost:7000/api/v1/message/getall",
+            "http://localhost:7000/api/v1/user/user/me",
             {withCredentials:true}
         );
         setMessages(data.messages);
@@ -43,7 +43,7 @@ if (!isAuthenticated) {
                     Email: <span>{element.email}</span>
                   </p>
                   <p>
-                    Message: <span>{element.message}</span>
+                    Message: <span>[{element.message}]</span>
                   </p>
                 </div>
                 </div>
