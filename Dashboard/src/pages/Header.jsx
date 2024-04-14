@@ -2,19 +2,22 @@ import React from 'react'
 import './header.css'
 // import people from '../../assets/people.png'
 import ai from '../assets/ai.png'
+import {Context} from '../main'
 
 function Header() {
+  const {isAuthenticated}= React.useContext(Context)
   const handleOnclick = () => {
     window.location.href = '/Login'
   }
   return (
-    <div className='gpt3__header' id='home'>
+    <div className='gpt3__header gradient__bg' id='home'>
       <div className='gpt3__header-content'>
         <h1 className='gradient__text'>Have a question? </h1>
         <p>Get instant answers on any topic, powered by people like you.</p>
         <div className='gpt3__header-content__input'>
           {/* <input type="email" placeholder='Your email address' /> */}
-          <button className='gpt3__header-button' type='button' onClick={handleOnclick} >Start Searching</button>
+          
+          {!isAuthenticated &&  <button className='gpt3__header-button' type='button' onClick={handleOnclick} >Start Searching</button>}
         </div>
         {/* <div className='gpt3__header-content__people'>
           <img src= { people } alt="people" />

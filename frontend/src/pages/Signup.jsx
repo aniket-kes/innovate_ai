@@ -35,6 +35,7 @@ const Register = () => {
         setLastName("");
         setEmail("");
         setPassword("");
+        localStorage.setItem("user",JSON.stringify(res.data.user));
       });
     } catch(error){
       toast.error(error.response.data.message);

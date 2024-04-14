@@ -33,6 +33,7 @@ const Login = () => {
           setEmail("");
           setPassword("");
           setConfirmPassword("");
+          localStorage.setItem("user",JSON.stringify(res.data.user));
         });
     } catch (error) {
       toast.error(error.response.data.message);

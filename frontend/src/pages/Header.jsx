@@ -9,9 +9,12 @@ function Header() {
   const { isAuthenticated } = React.useContext(Context)
   const navigateTo = useNavigate();
 
-  const islogin = localStorage.getItem('islogin')
+  const loggedInUser=localStorage.getItem("user");
+  console.log(loggedInUser);
+
   const handleOnclick = () => {
     if(isAuthenticated) {
+      localStorage.setItem('isAuthenticated');
       navigateTo("/chat")
       console.log('isAuthenticated', isAuthenticated);
     }
