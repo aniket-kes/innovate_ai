@@ -19,7 +19,7 @@ def genrules():
     return jsonify(results), 200, {'Content-Type':'application/json'}
 
 def llmresponse(text):
-    api_key = 'AIzaSyAvBSb1jIq0sOc9RhmRM-ZCiI7SV9_Ph7I'
+    api_key = ''
     from langchain_google_genai import GoogleGenerativeAI
     llm = GoogleGenerativeAI(model="models/text-bison-001", google_api_key=api_key, temperature=0)
     template = """

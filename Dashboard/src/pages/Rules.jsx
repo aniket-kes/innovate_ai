@@ -43,6 +43,8 @@ function Rules() {
                 setRules(result)
         })
     }
+    //['file1','file2']
+    //[['Rule1','Rule2','Rule3'],['Rule1','Rule2']]
     print(totalrules)
     setfileName(fileName)
     setRules(totalrules)
