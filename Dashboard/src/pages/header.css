@@ -1,3 +1,28 @@
+.gradient__bg{
+    min-height: 100vh;
+    /* ff 3.6+ */
+    background:-moz-radial-gradient(circle at 3% 25%, rgba(15, 29, 92, 1) 0%, rgba(0, 0, 0, 1) 100%);
+
+    /* safari 5.1+,chrome 10+ */
+    background:-webkit-radial-gradient(circle at 3% 25%, rgba(15, 29, 92, 1) 0%, rgba(0, 0, 0, 1) 100%);
+
+    /* opera 11.10+ */
+    background:-o-radial-gradient(circle at 3% 25%, rgba(15, 29, 92, 1) 0%, rgba(0, 0, 0, 1) 100%);
+
+    /* ie 10+ */
+    background:-ms-radial-gradient(circle at 3% 25%, rgba(15, 29, 92, 1) 0%, rgba(0, 0, 0, 1) 100%);
+
+    /* global 92%+ browsers support */
+    background:radial-gradient(circle at 3% 25%, rgba(15, 29, 92, 1) 0%, rgba(0, 0, 0, 1) 100%);
+
+}
+
+.gradient__text{
+    background: var(--gradient-text);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 .gpt3__header{
     display: flex;
     padding: 0rem 6rem;

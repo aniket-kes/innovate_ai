@@ -21,6 +21,11 @@ export default function Chat() {
       content: input
     };
 
+    
+
+
+
+
     setMessages([...messages, prompt]);
 
     await fetch("https://api.openai.com/v1/chat/completions", {
@@ -53,6 +58,32 @@ export default function Chat() {
   const clear = () => {
     setMessages([]);
     setHistory([]);
+  };
+  const handleDB = async (e) => {
+    e.preventDefault();
+    try {
+      await axios
+        .post(
+          "",
+          { email, password, confirmPassword, role: "User" },
+          {
+            withCredentials: true,
+            headers: { "Content-Type": "application/json" },
+          }
+        )
+        .then((res) => {
+          toast.success(res.data.message);
+          setIsAuthenticated(true);
+          navigateTo("/chat");
+          setEmail("");
+          setPassword("");
+          setConfirmPassword("");
+          setUser(res.data.user);
+          localStorage.setItem("user", JSON.stringify(res.data.user));
+        });
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
   };
 
   return (
