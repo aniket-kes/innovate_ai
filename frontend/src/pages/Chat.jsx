@@ -26,7 +26,7 @@ export default function Chat() {
     await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
-        Authorization: `Bearer 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`,
+        Authorization: `Bearer`,
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
