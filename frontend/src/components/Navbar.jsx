@@ -31,7 +31,6 @@ function Navbar() {
         </div>
         <div className='gpt3__navbar-links_container'> 
           <p><a href="/">Home</a></p>
-          <p><a href="http://localhost:5174">Dashboard</a></p>
           <p><a href="http://localhost:5174/" target='_blank'>Dashboard</a></p>
           <p><a href="/rules">Rules & regulation</a></p>
           <p><a href="#features"></a></p>

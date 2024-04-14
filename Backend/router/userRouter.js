@@ -22,9 +22,9 @@ router.get("/user/me",isUserAuthenticated,getUserDetails);
 router.get("/admin/me",isAdminAuthenticated,getUserDetails);
 router.get("/user/logout",isUserAuthenticated,logoutUser);
 router.get("/admin/logout",isAdminAuthenticated,logoutAdmin);
-router.post("/new",generateChatCompletion);
-router.get("/allchats",sendChatsToUser);
-router.delete("/delete",deleteChats);
+router.post("/new",isUserAuthenticated,generateChatCompletion);
+router.get("/allchats",isUserAuthenticated,sendChatsToUser);
+router.delete("/delete",isUserAuthenticated,deleteChats);
 
 
 

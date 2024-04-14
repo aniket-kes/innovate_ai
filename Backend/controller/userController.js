@@ -126,11 +126,12 @@ export const logoutAdmin = catchAsyncErrors(async (req, res, next) => {
       });
   });
   // generating chat
-  export const generateChatCompletion = async (req, res, next) => {
+  export const generateChatCompletion = catchAsyncErrors(async (req, res, next) =>  {
     const { message } = req.body;
+    console.log(message);
     try {
-     // const userId = req.user;
-     const user=localStorage.getItem("user");
+      const user = req.user;
+     
       if (!user)
         return res
           .status(401)
@@ -140,33 +141,35 @@ export const logoutAdmin = catchAsyncErrors(async (req, res, next) => {
         role,
         content,
       }));
-      chats.push({ content: message, role: "user" });
-      user.chats.push({ content: message, role: "user" });
+      chats.push({ message: message, role: "user" });
+      user.chats.push({ message: message, role: "user" });
   
       // send all chats with new one to openAI API
-      const config = ConfigureOpenAi();
-      const openai = new OpenAI(config);
+     // const config = ConfigureOpenAi();
+     // const openai = new OpenAI(config);
       // get latest response
-      const chatResponse = await openai.createChatCompletion({
+     /* const chatResponse = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
         messages: chats,
       });
       user.chats.push(chatResponse.data.choices[0].message);
+      */
       await user.save();
       return res.status(200).json({ chats: user.chats });
+      
     } catch (error) {
       console.log(error);
       return res.status(500).json({ message: "Something went wrong" });
     }
-  };
+  });
   // sends chat to user
   export const sendChatsToUser = async (req, res, next) => {
     try {
       //user token check
-     // const userId = req.user._id;
-     const user=localStorage.getItem("user");
+      const user = req.user;
+    // const user=localStorage.getItem("user");
       
-      cosnole.log(user);
+      console.log(user);
       if (!user) {
         return res.status(401).send("User not registered OR Token malfunctioned");
       }
@@ -183,7 +186,7 @@ export const logoutAdmin = catchAsyncErrors(async (req, res, next) => {
   export const deleteChats = async (req, res, next) => {
     try {
       //user token check
-      const user=localStorage.getItem("user");
+      const user=req.user;
     
       if (!user) {
         return res.status(401).send("User not registered OR Token malfunctioned");
