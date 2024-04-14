@@ -46,9 +46,27 @@ const Messages = () => {
                   <p>
                     Email: <span>{element.email}</span>
                   </p>
-                  <p>
-                    Message: <span>{element.message}</span>
-                  </p>
+                  <div>
+                    <h3>Chats:</h3>
+                    {element.chats ? (
+                      element.chats.map((chat) => (
+                        <div key={chat.id}>
+                          {/* <p>Chat ID: {chat.id}</p>
+                          <p>Role: {chat.role}</p> */}
+                          {/* <p>Messages:</p> */}
+                          { chat.message 
+                            ? ( chat.message.map((msg, index) => (
+                                <p key={index}>- {msg}</p>
+                              )))
+                            :(
+                              <p>No messages found.</p>
+                            )}
+                        </div>
+                      ))
+                    ) : (
+                      <p>No chats found.</p>
+                    )}
+                  </div>
                 </div>
               </div>
             );
