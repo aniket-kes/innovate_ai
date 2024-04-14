@@ -7,11 +7,13 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const { isAuthenticated, setIsAuthenticated } = useContext(Context);
+  const [user, setUser] = useState({});
 
   const [firstName,setFirstName]=useState("");
   const [lastName,setLastName]=useState("");
   const [email,setEmail]=useState("");
   const [password,setPassword]=useState("");
+
 
   const navigateTo = useNavigate();
 
@@ -35,14 +37,16 @@ const Register = () => {
         setLastName("");
         setEmail("");
         setPassword("");
-        localStorage.setItem("user",JSON.stringify(res.data.user));
+        setUser(res.data.user);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
       });
     } catch(error){
+      console.log(error);
       toast.error(error.response.data.message);
     }
   };
   if(isAuthenticated){
-    return <Navigate to={"/"} />
+    return <Navigate to={"/chat"} />
   }
   
   return (

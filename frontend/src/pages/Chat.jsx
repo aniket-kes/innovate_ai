@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { React, useState } from "react";
+import { Context } from "../main";
 
 import Message from "../components/Message";
 import Input from "../components/Input";
@@ -11,6 +12,8 @@ export default function Chat() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [history, setHistory] = useState([]);
+
+  //const auth = React.useContext(Context);
 
   const handleSubmit = async () => {
     const prompt = {
@@ -34,16 +37,16 @@ export default function Chat() {
       .then((data) => data.json())
       .then((data) => {
         console.log(data);
-        // const res = data.choices[0].message.content;
-        // setMessages((messages) => [
-        //   ...messages,
-        //   {
-        //     role: "assistant",
-        //     content: res
-        //   }
-        // ]);
-        // setHistory((history) => [...history, { question: input, answer: res }]);
-        // setInput("");
+         const res = data.choices[0].message.content;
+         setMessages((messages) => [
+           ...messages,
+           {
+             role: "assistant",
+             content: res
+           }
+        ]);
+        setHistory((history) => [...history, { question: input, answer: res }]);
+        setInput("");
       });
   };
 

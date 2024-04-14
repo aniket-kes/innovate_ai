@@ -7,6 +7,7 @@ import { Link, useNavigate, Navigate } from "react-router-dom";
 
 const Login = () => {
   const { isAuthenticated, setIsAuthenticated } = useContext(Context);
+  const [user, setUser] = useState({});
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,11 +30,12 @@ const Login = () => {
         .then((res) => {
           toast.success(res.data.message);
           setIsAuthenticated(true);
-          navigateTo("/");
+          navigateTo("/chat");
           setEmail("");
           setPassword("");
           setConfirmPassword("");
-          localStorage.setItem("user",JSON.stringify(res.data.user));
+          setUser(res.data.user);
+          localStorage.setItem("user", JSON.stringify(res.data.user));
         });
     } catch (error) {
       toast.error(error.response.data.message);
