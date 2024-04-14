@@ -52,6 +52,7 @@ const Sidebar = () => {
             <TiHome onClick={gotoHomePage} />
             <MdAddModerator onClick={gotoAddNewAdmin} />
             <AiFillMessage onClick={gotoMessagesPage} />
+            
             <RiLogoutBoxFill onClick={handleLogout} />
             
           </div>
