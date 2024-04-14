@@ -9,9 +9,22 @@ function Header() {
   const { isAuthenticated } = React.useContext(Context)
   const navigateTo = useNavigate();
 
-  const islogin = localStorage.getItem('islogin')
+  const loggedInUser = localStorage.getItem("user");
+  // useEffect(() => {
+  //   const loggedInUser = localStorage.getItem("user");
+  //   if (loggedInUser) {
+  //     navigateTo("/chat");
+  //   }
+  //   else 
+  //   {
+  //     navigateTo("/login");
+  //   }
+  // }, []); 
+
+
+  // const islogin = localStorage.getItem('user')
   const handleOnclick = () => {
-    if(isAuthenticated) {
+    if(isAuthenticated || loggedInUser) {
       navigateTo("/chat")
       console.log('isAuthenticated', isAuthenticated);
     }

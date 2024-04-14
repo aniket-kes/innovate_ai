@@ -41,6 +41,9 @@ const Sidebar = () => {
     setShow(!show);
   };
   
+  const handleOnclick = () =>{
+    
+  }
   return (
     <>
       {isAuthenticated && (
@@ -50,6 +53,7 @@ const Sidebar = () => {
             <MdAddModerator onClick={gotoAddNewAdmin} />
             <AiFillMessage onClick={gotoMessagesPage} />
             <RiLogoutBoxFill onClick={handleLogout} />
+            
           </div>
         </nav>
       )}

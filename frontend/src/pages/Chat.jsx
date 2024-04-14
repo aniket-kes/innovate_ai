@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { React, useState } from "react";
+import { Context } from "../main";
 
 import Message from "../components/Message";
 import Input from "../components/Input";
@@ -12,6 +13,8 @@ export default function Chat() {
   const [messages, setMessages] = useState([]);
   const [history, setHistory] = useState([]);
 
+  //const auth = React.useContext(Context);
+
   const handleSubmit = async () => {
     const prompt = {
       role: "user",
@@ -23,7 +26,7 @@ export default function Chat() {
     await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
+        Authorization: `Bearer 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`,
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
@@ -34,16 +37,16 @@ export default function Chat() {
       .then((data) => data.json())
       .then((data) => {
         console.log(data);
-        // const res = data.choices[0].message.content;
-        // setMessages((messages) => [
-        //   ...messages,
-        //   {
-        //     role: "assistant",
-        //     content: res
-        //   }
-        // ]);
-        // setHistory((history) => [...history, { question: input, answer: res }]);
-        // setInput("");
+         const res = data.choices[0].message.content;
+         setMessages((messages) => [
+           ...messages,
+           {
+             role: "assistant",
+             content: res
+           }
+        ]);
+        setHistory((history) => [...history, { question: input, answer: res }]);
+        setInput("");
       });
   };
 
