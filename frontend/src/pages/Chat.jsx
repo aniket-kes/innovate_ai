@@ -6,6 +6,8 @@ import Input from "../components/Input";
 import History from "../components/History";
 import Clear from "../components/Clear";
 
+import axios from "axios";
+
 import "./chat.css";
 
 export default function Chat() {
@@ -21,6 +23,7 @@ export default function Chat() {
       content: input
     };
 
+    const chat = await sendChatRequest(prompt.role, prompt.content);
     setMessages([...messages, prompt]);
 
     await fetch("https://api.openai.com/v1/chat/completions", {
@@ -50,9 +53,33 @@ export default function Chat() {
       });
   };
 
-  const clear = () => {
+  const clear = async() => {
+    // const res = await axios.delete("http://localhost:7000/api/v1/user/delete");
+    // if (res.status !== 200) {
+    //   throw new Error("Unable to delete chats");
+    // }
+    // const data = await res.message;
     setMessages([]);
     setHistory([]);
+  };
+  
+
+  const sendChatRequest = async (role, message) => {
+    const res = 
+      await axios
+        .post(
+          "http://localhost:7000/api/v1/user/new",
+          { id:"", role, message},
+          {
+            withCredentials: true,
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+        if (res.status !== 200) {
+          throw new Error("Unable to send chat");
+        }
+        const data = await res.data;
+        return data;
   };
 
   return (
