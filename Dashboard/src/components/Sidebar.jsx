@@ -4,6 +4,7 @@ import { RiLogoutBoxFill } from "react-icons/ri";
 import { AiFillMessage } from "react-icons/ai";
 import { MdAddModerator } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { MdRule } from "react-icons/md";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Context } from "../main";
@@ -40,6 +41,10 @@ const Sidebar = () => {
     navigateTo("/admin/addnew");
     setShow(!show);
   };
+  const gotoRulePage = () => {
+    navigateTo("/rules");
+    setShow(!show);
+  };
   return (
     <>
       <nav
@@ -50,6 +55,7 @@ const Sidebar = () => {
           <TiHome onClick={gotoHomePage} />
           <MdAddModerator onClick={gotoAddNewAdmin} />
           <AiFillMessage onClick={gotoMessagesPage} />
+          <MdRule onClick={gotoRulePage}/>
           <RiLogoutBoxFill onClick={handleLogout} />
           </div>
           </nav>
