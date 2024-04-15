@@ -210,7 +210,7 @@ export default function Chat() {
             return (
               <div key={i}>
                 <p>Text Risk Score: {el.score}%</p>
-                
+                {el.score > 30?window.alert("ALERT! Your Input has a high Risk Score"):undefined}
                 <Message role={el.role} content={el.content} />
                <b><i>
                 {el.llmres? <Message role={el.role} content={el.llmres} /> : <br></br>}

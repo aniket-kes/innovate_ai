@@ -110,7 +110,7 @@
 }
 
 .gpt3__header-img{
-    flex: 1;
+    flex: 1.5;
     display: flex;
     justify-content: center;
     align-items: center;
