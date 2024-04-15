@@ -10,15 +10,23 @@ import axios from "axios";
 
 import "./chat.css";
 
+
 export default function Chat() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [history, setHistory] = useState([]);
+  const [riskScore, setRiskScore] = useState(0);
 
   //const auth = React.useContext(Context);
 
   const handleSubmit = async () => {
     let sc = 0
+    const textpromp = {
+      role: "user",
+      messages: input
+    }
+
+    // sendChatRequest(textpromp.role, textpromp.messages)
 
     try{
       var data = {"text":input}
@@ -39,6 +47,7 @@ export default function Chat() {
         };
         setMessages([...messages, prompt]);
         setInput("")
+        setRiskScore(result)
     })
     }
     catch(error){
@@ -129,6 +138,29 @@ export default function Chat() {
       };
       setMessages([...messages, reschat]);
     }
+      const sendChatRequest = async (role, message) => {
+        const res = 
+          await axios
+            .post(
+              "http://localhost:7000/api/v1/user/new",
+              { id:"", role, message},
+              {
+                withCredentials: true,
+                headers: { "Content-Type": "application/json" },
+              }
+            );
+            if (res.status !== 200) {
+              throw new Error("Unable to send chat");
+            }
+            const data = await res.data;
+            console.log(data)
+            return data;
+      };
+    
+    
+
+    sendChatRequest(textpromp.role, textpromp.messages);
+
     // setHistory(messages)
 
     // await fetch("https://api.openai.com/v1/chat/completions", {
@@ -167,23 +199,7 @@ export default function Chat() {
   };
   
 
-  const sendChatRequest = async (role, message) => {
-    const res = 
-      await axios
-        .post(
-          "http://localhost:7000/api/v1/user/new",
-          { id:"", role, message},
-          {
-            withCredentials: true,
-            headers: { "Content-Type": "application/json" },
-          }
-        );
-        if (res.status !== 200) {
-          throw new Error("Unable to send chat");
-        }
-        const data = await res.data;
-        return data;
-  };
+  
 
   return (
     <div className="chat-app">

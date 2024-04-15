@@ -37,7 +37,7 @@ function Rules() {
 
   // var fileName = ["ToTheWeb.pdf","ToTheWebCopy.pdf"]
   // var rules=[['Rule1','Rule2','Rule3'],['Rule1','Rule2']]
-  const [visibleContent, setVisibleContent] = useState(fileName[0])
+  const [visibleContent, setVisibleContent] = useState(fileName)
   const handleButtonClick = (content) => {
     setVisibleContent(content);
   }
@@ -84,8 +84,8 @@ function Rules() {
           </div> */}
           
         </div>
-        <div className='rules-each'>
-          <div className="content">
+        <div className='rules-each gpt3_whatgpt3'>
+          <div className=" ">
           {/* {fileName.map((file,index)=>(
             <div key={index}>
               <p className='customcolorp'>
