@@ -19,29 +19,29 @@ Please copy paste this code in "config.env"
 	COOKIE_EXPIRE=7
 
 3. Open terminal <br>
-	cd Backend <br>
-	npm i  <br>
-	npm run start  <br>
+	`cd Backend` <br>
+	`npm i`  <br>
+	`npm run start`  <br>
 -> Runs at port 7000
 
 4. Open new terminal 
- 	cd frontend <br>
-	npm i <br>
-	npm run dev <br> 
+ 	`cd frontend` <br>
+	`npm i` <br>
+	`npm run dev` <br> 
 -> Runs at port 5173
 
 5. Open new terminal <br>
 	cd Dashboard  <br>
-	npm i <br>
-	npm run dev  <br>
+	`npm i` <br>
+	`npm run dev`  <br>
 -> Runs at port 5174
 
 6. Open new terminal 
-	cd flaskserver <br>
-	pip install -r requirements.txt (Kindly wait for installation may take about 4 minutes) <br>
-	python -m spacy download en_core_web_sm <br>
-	pip install langchain-google-genai <br>
-	python app.py  <br>
+	`cd flaskserver` <br>
+	`pip install -r requirements.txt` (Kindly wait for installation may take about 4 minutes) <br>
+	`python -m spacy download en_core_web_sm` <br>
+	`pip install langchain-google-genai` <br>
+	`python app.py`  <br>
 -> Runs at port 5001
 (If you face any ModuleNotFound Errors kindly pip install those modules) <br>
 
@@ -73,7 +73,7 @@ Upon output from the chatbot, you can see the 'filtered text', 'response to filt
 You will tonic there are no rules currently.  <br>
 Lets generate some through admin.  <br>
 
-11. In Navbar, please click on "Admin"  <br>
+11. In Navbar, please click on `"Admin"`  <br>
 
 12. Get started -> Here are admin credentials for you  <br>
 Email: admin1@gmail.com  <br>
@@ -97,7 +97,7 @@ Upload these 2 PDFs and Kindly wait for Rule Generation, there will be few pop-u
 
 The rules generated you can toggle between the respective PDF generated rules. <br>
 
-16. Now you can go back to the User tab 'frontend' and click on "Rules & Regulation" <br>
+16. Now you can go back to the User tab 'frontend' and click on `"Rules & Regulation"` <br>
 You see the Rules reloaded to be viewed by the User  <br>
 
 This is the demo for the experimenting with the code files. <br>
