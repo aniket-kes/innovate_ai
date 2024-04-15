@@ -1,6 +1,5 @@
 CREATE VENV
 RUN VENV
 pip install -r requirements.txt
-pip 
 python -m spacy download en_core_web_sm
 RUN: python app.py

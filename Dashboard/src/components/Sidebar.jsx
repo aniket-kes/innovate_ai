@@ -55,6 +55,7 @@ const Sidebar = () => {
             <MdAddModerator onClick={gotoAddNewAdmin} />
             <MdRule onClick={gotoRulePage}/>
             <AiFillMessage onClick={gotoMessagesPage} />
+            
             <RiLogoutBoxFill onClick={handleLogout} />
             
           </div>
