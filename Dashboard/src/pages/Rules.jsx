@@ -97,7 +97,7 @@ function Rules() {
     <div className='rules_header-box'>
         {/* <form encType="multipart/form-data"> */}
             <label htmlFor="inputfile">
-                <h1>File Upload</h1>
+                <h1 className='file-upload'>File Upload</h1>
             </label>
             <input type="file" name="pdf_file" id="inputfile" accept="application/pdf" onChange={onFileChange} multiple/>
             {/* <button type="submit">
