@@ -18,12 +18,10 @@ Please copy paste this code in "config.env"
 
 	COOKIE_EXPIRE=7
 
-3. Open terminal 
-<br>
-	cd Backend 
-<br>
-	npm i
-	npm run start
+3. Open terminal <br>
+	cd Backend <br>
+	npm i  <br>
+	npm run start  <br>
 -> Runs at port 7000
 
 4. Open new terminal 
