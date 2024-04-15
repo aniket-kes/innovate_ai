@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Messages from "./components/Messages";
 import Header from "./pages/Header";
+import Rules from "./pages/Rules"
 import { Context } from "./main";
 import axios from "axios";
 import { ToastContainer } from "react-toastify";
@@ -34,16 +35,17 @@ const App = () => {
     fetchUser();
   }, [isAuthenticated]);
   return (
-    <Router>
-      <Sidebar />
-      <Routes>
-      <Route path="/" element={<Header/> } />
-        <Route path="/login" element={<Login />} />
-        <Route path="/admin/addnew" element={<AddNewAdmin />} />
-        <Route path="/messages" element={<Messages />} />
+      <Router>
+        <Sidebar />
+        <Routes>
+          <Route path="/" element={<Header/> } />
+          <Route path="/login" element={<Login />} />
+          <Route path="/rules" element={<Rules />} />
+          <Route path="/admin/addnew" element={<AddNewAdmin />} />
+          <Route path="/messages" element={<Messages />} />
         </Routes>
         <ToastContainer position="top-center" />
-    </Router>
+      </Router>
   );
 };
 

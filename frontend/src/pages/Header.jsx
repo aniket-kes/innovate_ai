@@ -39,10 +39,12 @@ function Header() {
         <h1 className='gradient__text'>Have a question? </h1>
         <p>Get instant answers on any topic, powered by people like you.</p>
         <div className='gpt3__header-content__input'>
-          {/* <input type="email" placeholder='Your email address' /> */}
-          
-          <button className='gpt3__header-button' type='button' onClick={handleOnclick} >Get Started</button>
-          
+          {loggedInUser &&
+            <button className='gpt3__header-button' type='button' onClick={handleOnclick} >Start chat</button>
+          }
+          {!loggedInUser &&
+            <button className='gpt3__header-button' type='button' onClick={handleOnclick} >Get started</button>
+          }
         </div>
         {/* <div className='gpt3__header-content__people'>
           <img src= { people } alt="people" />

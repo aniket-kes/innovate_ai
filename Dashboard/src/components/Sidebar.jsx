@@ -5,6 +5,7 @@ import { AiFillMessage } from "react-icons/ai";
 import { MdAddModerator } from "react-icons/md";
 import { MdRule } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { MdRule } from "react-icons/md";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Context } from "../main";
@@ -45,22 +46,21 @@ const Sidebar = () => {
     navigateTo("/rules");
     setShow(!show);
   };
-  
   return (
     <>
-      {isAuthenticated && (
-        <nav className={show ? "show sidebar" : "sidebar"}>
-          <div className="links">
-            <TiHome onClick={gotoHomePage} />
-            <MdAddModerator onClick={gotoAddNewAdmin} />
-            <MdRule onClick={gotoRulePage}/>
-            <AiFillMessage onClick={gotoMessagesPage} />
-            
-            <RiLogoutBoxFill onClick={handleLogout} />
-            
+      <nav
+        style={!isAuthenticated ? { display: "none" } : { display: "flex" }}
+        className={show ? "show sidebar" : "sidebar"}
+      >
+        <div className="links">
+          <TiHome onClick={gotoHomePage} />
+          <MdAddModerator onClick={gotoAddNewAdmin} />
+          <AiFillMessage onClick={gotoMessagesPage} />
+          <MdRule onClick={gotoRulePage}/>
+          <RiLogoutBoxFill onClick={handleLogout} />
           </div>
         </nav>
-      )}
+      
       {isAuthenticated && (
         <div className="wrapper" style={{ display: "flex" }}>
           <GiHamburgerMenu className="hamburger" onClick={() => setShow(!show)} />
