@@ -13,6 +13,8 @@ def genrules():
     print('genrules entered')
     data = request.get_json(force=True)
     doc = data['text']
+    if len(doc)>7000:
+        doc = doc[:6500]
     rules = llmresponse(doc)
     #print(rules)
     print('Received a file')
