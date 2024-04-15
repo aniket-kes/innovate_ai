@@ -3,7 +3,6 @@ import { TiHome } from "react-icons/ti";
 import { RiLogoutBoxFill } from "react-icons/ri";
 import { AiFillMessage } from "react-icons/ai";
 import { MdAddModerator } from "react-icons/md";
-import { MdRule } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdRule } from "react-icons/md";
 import axios from "axios";
