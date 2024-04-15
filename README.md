@@ -31,12 +31,12 @@ Please copy paste this code in "config.env"
 -> Runs at port 5173
 
 5. Open new terminal <br>
-	cd Dashboard  <br>
+	`cd Dashboard`  <br>
 	`npm i` <br>
 	`npm run dev`  <br>
 -> Runs at port 5174
 
-6. Open new terminal 
+6. Open new terminal <br>
 	`cd flaskserver` <br>
 	`pip install -r requirements.txt` (Kindly wait for installation may take about 4 minutes) <br>
 	`python -m spacy download en_core_web_sm` <br>
@@ -69,7 +69,7 @@ I've been trying to figure out why the authentication isn't working as expected,
 
 Upon output from the chatbot, you can see the 'filtered text', 'response to filtered text' and the text risk scores.  <br>
 
-10. In Navbar, on top, please click on "Rules & Regulation"  <br>
+10. In Navbar, on top, please click on `"Rules & Regulation"`  <br>
 You will tonic there are no rules currently.  <br>
 Lets generate some through admin.  <br>
 
