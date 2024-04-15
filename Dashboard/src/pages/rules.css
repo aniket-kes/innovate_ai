@@ -1,4 +1,8 @@
-.rules_container .gpt3__whatgpt3 {
+.gpt3__whatgpt3 {
+    left:120px;
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    position: absolute;
     display: flex;
     flex-direction: column;
 
@@ -6,48 +10,40 @@
     padding: 2rem;
     background: var(--color-footer);
 
-    /* ff 3.6+ */
+
     background:-moz-radial-gradient(circle at 30% -100%, #042c54 25%, rgba(4, 44, 84, 1) 85%, rgba(27, 120, 222, 1) 100%);
 
-    /* safari 5.1+,chrome 10+ */
+
     background:-webkit-radial-gradient(circle at 30% -100%, #042c54 25%, rgba(4, 44, 84, 1) 85%, rgba(27, 120, 222, 1) 100%);
 
-    /* opera 11.10+ */
+
     background:-o-radial-gradient(circle at 30% -100%, #042c54 25%, rgba(4, 44, 84, 1) 85%, rgba(27, 120, 222, 1) 100%);
 
-    /* ie 10+ */
+
     background:-ms-radial-gradient(circle at 30% -100%, #042c54 25%, rgba(4, 44, 84, 1) 85%, rgba(27, 120, 222, 1) 100%);
 
-    /* global 92%+ browsers support */
+
     background:radial-gradient(circle at 30% -100%, #042c54 25%, rgba(4, 44, 84, 1) 85%, rgba(27, 120, 222, 1) 100%);
 
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
+.customcolorp{
+    color:white;
+}
+
 .rules_container{
     display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
-    
+    flex-direction: column;   
 }
 
 .rules_header{
     display: flex;
-    /* justify-content: center; */
     align-items: center;
     margin-right: 2rem;
 }
 
-/* .rules_header-box{
-    display: flex;
-    margin: 0 1.2rem;
-    padding: 8px 16px;
-    border: 2px solid #ffffff;
-    border-radius: 100px;
-} */
-
 .rules_header-box .active, .rules_header-box button:hover{
-    /* background: #ffffff; */
     background: #000;
     transition: all 0.3s ease-in-out;
 }
@@ -66,54 +62,20 @@
 .rules_header-box button{
     padding: 0.5rem 1rem;
     background: none;
-    /* border-radius: 5px; */
     cursor: pointer;
     color: #fff;
     font-family: var(--font-family);
-    /* font-weight: 500; */
-    /* font-size: 18px; */
     border: 2px solid white;
     border-radius: 100px;
     text-transform: capitalize  ;
     margin: 2px 10px ;
-    
-    /* line-height: 25px; */
-    /* border: 0; */
-    /* width: fit-content; */
-    /* outline: none; */
 }
 
 .rules-each{
     display: flex;
-    /* flex: 0.8; */
     width: 80%;
     margin-top: 3rem;
     margin-left: 1rem;
-
-
-    display: flex;
-    flex-direction: column;
-
-
-    padding: 2rem;
-    background: var(--color-footer);
-
-    /* ff 3.6+ */
-    background:-moz-radial-gradient(circle at 30% -100%, #042c54 25%, rgba(4, 44, 84, 1) 85%, rgba(27, 120, 222, 1) 100%);
-
-    /* safari 5.1+,chrome 10+ */
-    background:-webkit-radial-gradient(circle at 30% -100%, #042c54 25%, rgba(4, 44, 84, 1) 85%, rgba(27, 120, 222, 1) 100%);
-
-    /* opera 11.10+ */
-    background:-o-radial-gradient(circle at 30% -100%, #042c54 25%, rgba(4, 44, 84, 1) 85%, rgba(27, 120, 222, 1) 100%);
-
-    /* ie 10+ */
-    background:-ms-radial-gradient(circle at 30% -100%, #042c54 25%, rgba(4, 44, 84, 1) 85%, rgba(27, 120, 222, 1) 100%);
-
-    /* global 92%+ browsers support */
-    background:radial-gradient(circle at 30% -100%, #042c54 25%, rgba(4, 44, 84, 1) 85%, rgba(27, 120, 222, 1) 100%);
-
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .rules-each .content{
@@ -122,7 +84,7 @@
     border-radius: 10px;
 }
 
-.rules-each p{
+.rules-each .content p{
     color: #fff;
     font-family: var(--font-family);
     font-weight: 500;
