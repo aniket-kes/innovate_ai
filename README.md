@@ -19,7 +19,9 @@ Please copy paste this code in "config.env"
 	COOKIE_EXPIRE=7
 
 3. Open terminal 
+<br>
 	cd Backend 
+<br>
 	npm i
 	npm run start
 -> Runs at port 7000
