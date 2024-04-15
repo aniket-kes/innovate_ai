@@ -4,7 +4,7 @@
     padding: 0;
     box-sizing: border-box;
     overflow-x: hidden;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Manrope', sans-serif;
   }
 
   body {
@@ -155,7 +155,7 @@
   border-radius: 8px;
   font-size: 24px;
   margin-bottom: 30px;
-  background: linear-gradient(140deg, #9083d5, #271776ca);
+  background: rgb(220, 67, 16);
 }
 .form-component .wrapper {
     display: flex;
@@ -173,7 +173,7 @@
     max-width: 450px;
   }
   .login-form {
-    margin: 100px auto 20px auto;
+    margin: 0 auto 20px auto;
     max-width: 800px;
     text-align: center;
   }
@@ -182,7 +182,7 @@
   }
   .register-form {
     max-width: 1200px;
-    margin: 100px auto 20px auto;
+    margin: 0 auto 20px auto;
   }
  .register-form h2 {
     color: #000;

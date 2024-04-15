@@ -50,7 +50,7 @@ const Login = () => {
     <>
     
       <div className="container form-component login-form">
-        <h2>Sign In</h2>
+        <h2 style={{color:"white"}}>Sign In</h2>
         <p>Please Login To Continue</p>
         <form onSubmit={handleLogin}>
           <input
@@ -81,7 +81,7 @@ const Login = () => {
             <p style={{ marginBottom: 0 }}>Not Registered?</p>
             <Link
               to={"/signup"}
-              style={{ textDecoration: "none", color: "#271776ca" }}
+              style={{ textDecoration: "none", color: "rgb(220, 67, 16)" }}
             >
               Register Now
             </Link>

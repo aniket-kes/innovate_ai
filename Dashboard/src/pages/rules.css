@@ -37,6 +37,11 @@
     flex-direction: column;   
 }
 
+.file-upload{
+    color: white;
+    margin-top: 1rem;
+}
+
 .rules_header{
     display: flex;
     align-items: center;
