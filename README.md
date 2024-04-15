@@ -40,7 +40,7 @@ Please copy paste this code in "config.env"
 	cd flaskserver
 	pip install -r requirements.txt (Kindly wait for installation may take about 4 minutes)
 	python -m spacy download en_core_web_sm
-	pip install --upgrade --quiet langchain-google-genai
+	pip install langchain-google-genai
 	python app.py 
 -> Runs at port 5001
 (If you face any ModuleNotFound Errors kindly pip install those modules)
