@@ -3,6 +3,7 @@ import { TiHome } from "react-icons/ti";
 import { RiLogoutBoxFill } from "react-icons/ri";
 import { AiFillMessage } from "react-icons/ai";
 import { MdAddModerator } from "react-icons/md";
+import { MdRule } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -40,10 +41,11 @@ const Sidebar = () => {
     navigateTo("/admin/addnew");
     setShow(!show);
   };
+  const gotoRulePage = () => {
+    navigateTo("/rules");
+    setShow(!show);
+  };
   
-  const handleOnclick = () =>{
-    
-  }
   return (
     <>
       {isAuthenticated && (
@@ -51,6 +53,7 @@ const Sidebar = () => {
           <div className="links">
             <TiHome onClick={gotoHomePage} />
             <MdAddModerator onClick={gotoAddNewAdmin} />
+            <MdRule onClick={gotoRulePage}/>
             <AiFillMessage onClick={gotoMessagesPage} />
             <RiLogoutBoxFill onClick={handleLogout} />
             
