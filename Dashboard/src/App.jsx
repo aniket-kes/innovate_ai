@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Messages from "./components/Messages";
 import Header from "./pages/Header";
+
 import Rules from "./pages/Rules"
 import { Context } from "./main";
 import axios from "axios";
@@ -11,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Sidebar from "./components/Sidebar";
 import AddNewAdmin from "./components/AddNewAdmin";
 import "./App.css";
+import Dash from "./components/Dash";
 
 const App = () => {
   const { isAuthenticated, setIsAuthenticated, admin, setAdmin } =
@@ -38,7 +40,8 @@ const App = () => {
       <Router>
         <Sidebar />
         <Routes>
-          <Route path="/" element={<Header/> } />
+        
+          <Route path="/" element={<Dash/> } />
           <Route path="/login" element={<Login />} />
           <Route path="/rules" element={<Rules />} />
           <Route path="/admin/addnew" element={<AddNewAdmin />} />
