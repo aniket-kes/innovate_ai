@@ -16,15 +16,18 @@ export default function Chat() {
   const [messages, setMessages] = useState([]);
   const [history, setHistory] = useState([]);
   const [riskScore, setRiskScore] = useState(0);
+  const [QueryScore, setQueryScore] = useState(0);
 
   //const auth = React.useContext(Context);
 
+  let unsafeQueries=0;
   const handleSubmit = async () => {
     let sc = 0
     const textpromp = {
       role: "user",
       messages: input
     }
+    // console.log(textpromp.messages);
 
     // sendChatRequest(textpromp.role, textpromp.messages)
 
@@ -48,6 +51,10 @@ export default function Chat() {
         setMessages([...messages, prompt]);
         setInput("")
         setRiskScore(result)
+        setQueryScore(prompt.score)
+        unsafeQueries=prompt.score
+        
+
     })
     }
     catch(error){
@@ -138,12 +145,14 @@ export default function Chat() {
       };
       setMessages([...messages, reschat]);
     }
-      const sendChatRequest = async (role, message) => {
+   
+      const sendChatRequest = async (role, message, unsafeQueries) => {
+        console.log(unsafeQueries)
         const res = 
           await axios
             .post(
               "http://localhost:7000/api/v1/user/new",
-              { id:"", role, message},
+              { id:"", role, message,unsafeQueries},
               {
                 withCredentials: true,
                 headers: { "Content-Type": "application/json" },
@@ -157,9 +166,9 @@ export default function Chat() {
             return data;
       };
     
-    
+     
 
-    sendChatRequest(textpromp.role, textpromp.messages);
+    sendChatRequest(textpromp.role, textpromp.messages,unsafeQueries)
 
     // setHistory(messages)
 

@@ -129,7 +129,7 @@ export const logoutAdmin = catchAsyncErrors(async (req, res, next) => {
   });
   // generating chat
   export const generateChatCompletion = catchAsyncErrors(async (req, res, next) =>  {
-    const { message } = req.body;
+    const { message,unsafeQueries } = req.body;
     console.log(message);
     try {
       const user = req.user;
@@ -143,8 +143,8 @@ export const logoutAdmin = catchAsyncErrors(async (req, res, next) => {
         role,
         content,
       }));
-      chats.push({ message: message, role: "user" });
-      user.chats.push({ message: message, role: "user" });
+      chats.push({ message: message, role: "user", unsafeQueries:unsafeQueries });
+      user.chats.push({ message: message, role: "user",unsafeQueries:unsafeQueries });
   
       // send all chats with new one to openAI API
      // const config = ConfigureOpenAi();
