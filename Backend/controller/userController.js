@@ -129,22 +129,25 @@ export const logoutAdmin = catchAsyncErrors(async (req, res, next) => {
   });
   // generating chat
   export const generateChatCompletion = catchAsyncErrors(async (req, res, next) =>  {
-    const { message } = req.body;
+    const { message, score } = req.body;
     console.log(message);
+    console.log(score);
     try {
       const user = req.user;
      
       if (!user)
-        return res
-          .status(401)
-          .json({ message: "User not registered OR Token malfunctioned" });
+      return res
+        .status(401)
+        .json({ message: "User not registered OR Token malfunctioned" });
       // grab chats of user
       const chats = user.chats.map(({ role, content }) => ({
-        role,
-        content,
+      role,
+      content,
       }));
-      chats.push({ message: message, role: "user" });
-      user.chats.push({ message: message, role: "user" });
+      chats.push({ message: message, score: score, role: "user" });
+      user.chats.push({ message: message, score: score, role: "user" });
+      
+    
   
       // send all chats with new one to openAI API
      // const config = ConfigureOpenAi();

@@ -17,6 +17,10 @@ const chatSchema = new mongoose.Schema({
       type: String,
       required:true,
     }],
+    unsafeQquery:{
+      type: Number,
+      default: 0,
+    },
 });
 
 const userSchema=new mongoose.Schema({
@@ -51,6 +55,7 @@ const userSchema=new mongoose.Schema({
     //   required:[true];
     // }]
     chats:[chatSchema],
+    
 });
 userSchema.pre("save", async function (next) {
     if (!this.isModified("password")) {

@@ -23,7 +23,8 @@ export default function Chat() {
     let sc = 0
     const textpromp = {
       role: "user",
-      messages: input
+      messages: input,
+      score: riskScore
     }
 
     // sendChatRequest(textpromp.role, textpromp.messages)
@@ -138,28 +139,29 @@ export default function Chat() {
       };
       setMessages([...messages, reschat]);
     }
-      const sendChatRequest = async (role, message) => {
-        const res = 
-          await axios
-            .post(
-              "http://localhost:7000/api/v1/user/new",
-              { id:"", role, message},
-              {
-                withCredentials: true,
-                headers: { "Content-Type": "application/json" },
-              }
-            );
-            if (res.status !== 200) {
-              throw new Error("Unable to send chat");
+
+    const sendChatRequest = async (role, message, riskScore) => {
+      const res = 
+        await axios
+          .post(
+            "http://localhost:7000/api/v1/user/new",
+            { id:"", role, message, riskScore},
+            {
+              withCredentials: true,
+              headers: { "Content-Type": "application/json" },
             }
-            const data = await res.data;
-            console.log(data)
-            return data;
-      };
+          );
+          if (res.status !== 200) {
+            throw new Error("Unable to send chat");
+          }
+          const data = await res.data;
+          console.log(data)
+          return data;
+    };
     
     
 
-    sendChatRequest(textpromp.role, textpromp.messages);
+    sendChatRequest(textpromp.role, textpromp.messages, riskScore);
 
     // setHistory(messages)
 
