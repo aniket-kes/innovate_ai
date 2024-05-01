@@ -31,12 +31,15 @@ const Login = () => {
         setPassword("");
         setConfirmPassword("");
         console.log(isAuthenticated);
+        window.location.reload();
       });
     } catch (error) {
         toast.error(error.response.data.message);
       }
     };
-    if (isAuthenticated) {
+      if (isAuthenticated) {
+        //Refresh the page oncle logged in
+        // window.location.reload();
         return <Navigate to={"/"} />;
       }
       return (

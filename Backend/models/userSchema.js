@@ -17,10 +17,10 @@ const chatSchema = new mongoose.Schema({
       type: String,
       required:true,
     }],
-    unsafeQquery:{
-      type: Number,
-      default: 0,
+    unsafeQueries:{
+      type:Number,
     },
+
 });
 
 const userSchema=new mongoose.Schema({
@@ -50,12 +50,11 @@ const userSchema=new mongoose.Schema({
       required: [true, "User Role Required!"],
       enum: ["User","Admin"],
     },
-    // chats:[{
-    //   type:String,
-    //   required:[true];
-    // }]
     chats:[chatSchema],
-    
+    timedOut: {
+      type: Boolean,
+      default: false,
+    },
 });
 userSchema.pre("save", async function (next) {
     if (!this.isModified("password")) {
