@@ -104,6 +104,36 @@ const handleTimeout = async (id) => {
     },
   ];
 
+  const [selectedChoice, setSelectedChoice] = useState('Google-Palm');
+
+  const handleButtonClick = (choice) => {
+    setSelectedChoice(choice);
+    // handleChoice(choice);
+    toast.success(choice+" API is selected")
+    try{
+      var data = {"APIChoice":choice}
+        const response = fetch('http://127.0.0.1:5001/apichoice', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+            }).then(response => response.json())
+            .then(result => {
+            console.log(result);
+            // fileName = result['filenames']
+            // setfileName(result['filenames'])
+            // setRules(result['totalrules'])
+            // rules=result['totalrules']
+            // console.log(fileName)
+            // console.log(rules)
+        })
+    }
+    catch(error){
+      console.log("Error:",error)
+    }
+  };
+
   return (
     <>
       <section className="dashboard page">

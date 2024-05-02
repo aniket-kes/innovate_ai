@@ -62,6 +62,7 @@ export default function Chat() {
 
   let unsafeQueries=0;
   const handleSubmit = async () => {
+    setAlertShow(false)
     let sc = 0
     const textpromp = {
       role: "user",
@@ -268,7 +269,11 @@ export default function Chat() {
   //   checkTimedOutStatus();
   // }, []);
 
-  
+  const [alertshow, setAlertShow] = useState(false);
+
+  const handlealertshow = (booleanstate) =>{
+    setAlertShow(booleanstate)
+  }
 
   return (
     <div className="chat-app">
@@ -276,10 +281,15 @@ export default function Chat() {
         <h3 className="Title">Chat Messages</h3>
         <div className="Content">
           {messages.map((el, i) => {
+            let showAlert = alertshow;
+            if(el.score>30 && !showAlert){
+              window.alert("ALERT! Your Input has a high Risk Score");
+              handlealertshow(true)
+            }
             return (
               <div key={i}>
                 <p>Text Risk Score: {el.score}%</p>
-                {el.score > 30?window.alert("ALERT! Your Input has a high Risk Score"):undefined}
+                {/* {el.score > 30?window.alert("ALERT! Your Input has a high Risk Score"):undefined} */}
                 <Message role={el.role} content={el.content} />
                <b><i>
                 {el.llmres? <Message role={el.role} content={el.llmres} /> : <br></br>}
