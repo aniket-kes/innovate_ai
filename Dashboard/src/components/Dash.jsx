@@ -14,7 +14,8 @@ const Dash = () => {
             "http://localhost:7000/api/v1/user/user/me",
             { withCredentials: true }
           );
-          setDetails(data.details);
+          setDetails(data.user);
+          console.log(data)
         } catch (error) {
             setDetails([]);
             console.log(error)
@@ -48,7 +49,7 @@ const Dash = () => {
       return <Navigate to={"/login"} />;
     }
     console.log(admin[0])
-    console.log(details)
+    console.log(details,"user")
   
     return (
       <>
@@ -86,14 +87,18 @@ const Dash = () => {
                   <th>FirstName</th>
                   <th>LastName</th>
                   <th>Email</th>
+                  <th>Role</th>
                 </tr>
               </thead>
               <tbody>
                 {details &&  details.length > 0
                   ? details.map((details) => (
                       <tr key={details._id}>
-                        <td>{`${details.firstName} ${details.lastName}`}</td>
+                        <td>{`${details.firstName}`}</td>
+                        <td>{`${details.lastName}`}</td>
                         <td>{details.email}</td>
+                        <td>{details.role}</td>
+                        
                         <td>
                          
                         </td>
