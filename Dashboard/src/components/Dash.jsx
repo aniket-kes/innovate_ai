@@ -95,6 +95,25 @@ const handleTimeout = async (id) => {
   const adminCount = details.filter((user) => user.role === "Admin").length;
   const userCount = totalUsers - adminCount;
 
+  const [selectedChoice, setSelectedChoice] = useState('Google-Palm');
+  const handleButtonClick = (choice) => {
+    setSelectedChoice(choice);
+    toast.success(choice+" API Selected")
+    //handleChoice(choice);
+    var data = {"APIChoice":choice}
+    const response = fetch('http://127.0.0.1:5001/apichoice', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+        }).then(response => response.json())
+        .then(result => {
+        //   console.log(result); 
+        //console.log(result)
+    })
+  };
+
   return (
     <>
       <section className="dashboard page">
@@ -199,6 +218,43 @@ const handleTimeout = async (id) => {
             </tbody>
           </table>
         </div>
+        <div>
+        <div className="banner">
+        <div className="content">
+          <div>
+            <h1>API Choice:</h1>
+          </div>
+          <div className="switch-button">
+            <button className={selectedChoice === 'Google-Palm' ? 'selected' : ''} onClick={() => handleButtonClick('Google-Palm')}>
+              Google-Palm
+            </button>
+            <button className={selectedChoice === 'ChatGPT' ? 'selected' : ''}  onClick={() => handleButtonClick('ChatGPT')}>
+             ChatGPT
+            </button>
+            <style>
+        {`
+          .switch-button button {
+            flex: 1;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: goldenrod;
+            background-color:white;
+            border: solid goldenrod 1px;
+          }
+          
+          .switch-button button.selected {
+            background-color: goldenrod;
+            color: white;
+          }
+        `}
+      </style>
+            </div>
+        </div>
+        </div>
+        </div>
+        
       </section>
     </>
   );
