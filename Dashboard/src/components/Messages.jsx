@@ -28,12 +28,18 @@ const Messages = () => {
   // if (!isAuthenticated) {
   //   return <Navigate to={"/login"} />;
   // }
+   // Function to toggle view more for a message
+   const toggleViewMore = (index) => {
+    const updatedUsers = [...users];
+    updatedUsers[index].showFullMessage = !updatedUsers[index].showFullMessage;
+    setUsers(updatedUsers);
+  };
   return (
     <section className="page messages">
         <h1>MESSAGE</h1>
         <div className="banner">
         {users ? (
-          users.map((element) => {
+          users.map((element,index) => {
             return (
               <div className="card" key={element._id}>
                 <div className="details">
@@ -55,10 +61,20 @@ const Messages = () => {
                           <p>Role: {chat.role}</p> */}
                           {/* <p>Messages:</p> */}
                           { chat.message 
-                            ? ( chat.message.map((msg, index) => (
-                                <p key={index}>- {msg}</p>
-                              )))
-                            :(
+                            ? ( chat.message.map((msg, msgIndex) => (
+                                <p key={ msgIndex}>
+                               - {msg.length > 50 && !element.showFullMessage ? `${msg.slice(0, 50)}...` : msg}
+                                {msg.length > 50 && (
+                                  <span
+                                    className="view-more"
+                                    onClick={() => toggleViewMore(index)}
+                                  >
+                                    {element.showFullMessage ? "View Less" : "View More"}
+                                  </span>
+                                )}
+                              </p>
+                            ))
+                            ):(
                               <p>No messages found.</p>
                             )}
                         </div>
