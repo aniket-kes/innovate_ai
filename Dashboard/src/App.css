@@ -285,7 +285,8 @@ body {
 .analytic .analytic-content{
   display: flex;
   /* width: inherit; */
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  /* align-items: center; */
   padding: 20px;
   border-radius: 10px;
   background-color: #fff;
@@ -299,6 +300,18 @@ body {
   margin: 0 12px;
   font-size: 1.5rem;
   text-align: center;
+}
+
+.content-1{
+  flex: 0.84;
+}
+
+.content-3{
+  flex: 0.4;
+}
+
+.analyticBox .figure{
+  margin:auto 0px;
 }
 
 .analyticBox_name{
