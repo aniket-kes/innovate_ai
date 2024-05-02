@@ -252,4 +252,43 @@ export const checkTimeoutStatus = catchAsyncErrors(async (req, res, next) => {
       return res.status(500).json({ success: false, message: "Internal server error" });
     }
   });
+
+  //Get Query Counts per day
+export const queryCountsPerDay = catchAsyncErrors(async (req, res, next) => {
+    const user = req.user;
+    if (!user) {
+      return res.status(401).send("User not registered OR Token malfunctioned");
+    }
+    try {
+      const userId = req.user._id; // Assuming you can identify the user by their ID
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(404).json({ success: false, message: "User not found" });
+      }
+    
+      // Aggregate queries for all chats of the user combined
+      const chats = user.chats;
+      console.log(chats);
+      const result = await chats.aggregate([
+        {
+          $match: { "_id": { $in: user.chats.map(chat => chat._id) } } // Match all chats of the user
+        },
+        {
+          $group: {
+            _id: {
+              year: { $year: "$timestamp" },
+              month: { $month: "$timestamp" },
+              day: { $dayOfMonth: "$timestamp" }
+            },
+            totalQueries: { $sum: 1 }
+          }
+        }
+      ]);
+    
+      res.json(result);
+    } catch (error) {
+      return res.status(500).json({ success: false, message: "Internal server error" });
+    }
+    
+  });
   

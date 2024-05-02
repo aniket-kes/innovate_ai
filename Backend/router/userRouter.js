@@ -10,7 +10,8 @@ logoutUser,
 sendChatsToUser, 
 userRegister,
 applyTimeout,
-checkTimeoutStatus
+checkTimeoutStatus,
+queryCountsPerDay
 } from "../controller/userController.js";
 import { isAdminAuthenticated, isUserAuthenticated } from "../middlewares/auth.js";
 
@@ -29,5 +30,6 @@ router.get("/allchats",isUserAuthenticated,sendChatsToUser);
 router.delete("/delete",isUserAuthenticated,deleteChats);
 router.post("/admin/apply-timeout", isAdminAuthenticated, applyTimeout);
 router.get("/timeout-status", isUserAuthenticated, checkTimeoutStatus);
+router.get("/queryCountsPerDay",isUserAuthenticated,queryCountsPerDay);
 
 export default router;

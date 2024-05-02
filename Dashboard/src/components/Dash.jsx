@@ -5,6 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { IoTimer } from "react-icons/io5";
 import { PieChart } from '@mui/x-charts/PieChart';
+import { LineChart } from '@mui/x-charts/LineChart';
 
 const Dash = () => {
   const [details, setDetails] = useState([]);
@@ -95,24 +96,13 @@ const handleTimeout = async (id) => {
   const adminCount = details.filter((user) => user.role === "Admin").length;
   const userCount = totalUsers - adminCount;
 
-  const [selectedChoice, setSelectedChoice] = useState('Google-Palm');
-  const handleButtonClick = (choice) => {
-    setSelectedChoice(choice);
-    toast.success(choice+" API Selected")
-    //handleChoice(choice);
-    var data = {"APIChoice":choice}
-    const response = fetch('http://127.0.0.1:5001/apichoice', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-        }).then(response => response.json())
-        .then(result => {
-        //   console.log(result); 
-        //console.log(result)
-    })
-  };
+  const xAxisData = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"];
+  const seriesData = [
+    {
+      data: [2, 3, 5, 8, 4, 6, 2, 7, 5, 9], // Number of queries made for each month
+      showMark: true, // Show points on the line
+    },
+  ];
 
   return (
     <>
@@ -142,7 +132,7 @@ const handleTimeout = async (id) => {
           </div>
         </div>
         <div className="analytic">
-          <div className="analytic-content">
+          <div className="analytic-content content-1">
             <div className="analyticBox">
               <div className="analyticBox_name">
                 <h4> Users Activity</h4>
@@ -162,12 +152,50 @@ const handleTimeout = async (id) => {
                 />
               </div>
             </div>
+            
 
-            {/* <div className="analyticBox">
-              <h5>Queries</h5>
-              <h3>{queries}</h3>
-            </div> */}
-
+          </div>
+          <div className="analytic-content content-2">
+            <div className="analyticBox">
+                <div className="analyticBox_name">
+                  <h4> API Calls</h4>
+                </div>
+                <div className="figure">
+                <LineChart
+                  
+                  xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
+                  series={[
+                    {
+                      data: [2, 5.5, 2, 8.5, 1.5, 5],
+                    },
+                  ]}
+                  width={500}
+                  height={300}
+                />
+                </div>
+                
+              </div>
+          </div>
+          <div className="analytic-content content-3">
+            <div className="analyticBox">
+                <div className="analyticBox_name">
+                  <h4> AI</h4>
+                </div>
+                <div className="figure">
+                  {/* <LineChart
+                    xAxis={[{ data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }]}
+                    series={[
+                      {
+                        data: [2, 3, 5.5, 8.5, 1.5, 5, 1, 4, 3, 8],
+                        showMark: ({ index }) => index % 2 === 0,
+                      },
+                    ]}
+                    width={500}
+                    height={300}
+                  /> */}
+                </div>
+                
+              </div>
           </div>
         </div>
         <div className="table">

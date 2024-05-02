@@ -4,6 +4,18 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { randomUUID } from "crypto";
 
+// const apiCallSchema = new mongoose.Schema({
+//   date: {
+//       type: Date,
+//       required: true,
+//       unique: true
+//   },
+//   count: {
+//       type: Number,
+//       default: 0
+//   }
+// });
+
 const chatSchema = new mongoose.Schema({
     id: {
       type: String,
@@ -20,7 +32,10 @@ const chatSchema = new mongoose.Schema({
     unsafeQueries:{
       type:Number,
     },
-
+    timestamp: {
+      type: Date,
+      default: Date.now
+    },
 });
 
 const userSchema=new mongoose.Schema({
@@ -55,6 +70,7 @@ const userSchema=new mongoose.Schema({
       type: Boolean,
       default: false,
     },
+    // apiCalls: [apiCallSchema],
 });
 userSchema.pre("save", async function (next) {
     if (!this.isModified("password")) {
