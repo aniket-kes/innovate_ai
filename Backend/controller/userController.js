@@ -131,17 +131,18 @@ export const logoutAdmin = catchAsyncErrors(async (req, res, next) => {
   export const generateChatCompletion = catchAsyncErrors(async (req, res, next) =>  {
     const { message,unsafeQueries } = req.body;
     console.log(message);
+    console.log(score);
     try {
       const user = req.user;
      
       if (!user)
-        return res
-          .status(401)
-          .json({ message: "User not registered OR Token malfunctioned" });
+      return res
+        .status(401)
+        .json({ message: "User not registered OR Token malfunctioned" });
       // grab chats of user
       const chats = user.chats.map(({ role, content }) => ({
-        role,
-        content,
+      role,
+      content,
       }));
       chats.push({ message: message, role: "user", unsafeQueries:unsafeQueries });
       user.chats.push({ message: message, role: "user",unsafeQueries:unsafeQueries });
@@ -205,4 +206,50 @@ export const logoutAdmin = catchAsyncErrors(async (req, res, next) => {
       return res.status(200).json({ message: "ERROR couldn't delete", cause: error.message });
     }
   };
+
+  //Apply timeout
+export const applyTimeout = catchAsyncErrors(async (req, res, next) => {
+    const { id } = req.body;
+    const user = req.user;
+    if (!user) {
+      return res.status(401).send("User not registered OR Token malfunctioned");
+    }
+    try {
+      // Update the user's record in the database to indicate timeout
+      // console.log(id);
+      const newUser = await User.findById(id);
+      if(newUser.timedOut){
+        newUser.timedOut = false;
+        await newUser.save();
+        // console.log(newUser);
+        return res.status(200).json({ message: "User removed from timedout"});
+      }
+      else{
+        newUser.timedOut = true;
+        await newUser.save();    
+        // console.log(newUser);
+        res.status(200).json({ message: "Timeout applied successfully"});
+      }
+    } catch (error) {
+      res.status(500).json({ message: "Failed to apply timeout", error: error.message });
+    }
+  });
+
+  //Check timeout status
+export const checkTimeoutStatus = catchAsyncErrors(async (req, res, next) => {
+    const user = req.user;
+    if (!user) {
+      return res.status(401).send("User not registered OR Token malfunctioned");
+    }
+    try {
+      const userId = req.user._id; // Assuming you can identify the user by their ID
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(404).json({ success: false, message: "User not found" });
+      }
+      return res.status(200).json({ success: true, isTimedOut: user.timedOut });
+    } catch (error) {
+      return res.status(500).json({ success: false, message: "Internal server error" });
+    }
+  });
   

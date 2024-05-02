@@ -28,6 +28,14 @@ const Login = () => {
           }
         )
         .then((res) => {
+          // console.log(res.data.user.timedOut);
+          if (res.data.user.timedOut) {
+            // Display a message or prevent the user from logging int
+            toast.success("You are timed out. Please contact the admin for assistance.");
+            alert("You are timed out. Please contact the admin for assistance.");
+            return;
+          }
+          // console.log(res.data.message);
           toast.success(res.data.message);
           setIsAuthenticated(true);
           navigateTo("/chat");
@@ -36,6 +44,7 @@ const Login = () => {
           setConfirmPassword("");
           setUser(res.data.user);
           localStorage.setItem("user", JSON.stringify(res.data.user));
+          
         });
     } catch (error) {
       toast.error(error.response.data.message);

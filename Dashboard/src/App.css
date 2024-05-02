@@ -40,9 +40,9 @@ body {
   margin-left: 120px;
   background: #e5e5e5;
   padding: 40px;
-  height: 100vh;
-  border-top-left-radius: 50px;
-  border-bottom-left-radius: 50px;
+  /* height: 100vh; */
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
 @media (max-width: 1208px) {
   .page {
@@ -313,7 +313,7 @@ body {
   gap: 20px;
 }
 .dashboard .banner:first-child {
-  height: 35vh;
+  /* height: 35vh; */
   display: flex;
   gap: 20px;
 }
@@ -321,8 +321,8 @@ body {
   flex: 2;
   display: flex;
   align-items: center;
-  border-radius: 20px;
-  background: #b5b5ff;
+  border-radius: 10px;
+  background: #b8b8db;
   padding: 20px 20px 0 10px;
 }
 .dashboard .banner:first-child .firstBox img {
@@ -341,25 +341,38 @@ body {
 .dashboard .banner:first-child .firstBox .content div p {
   margin-right: 10px;
   font-size: 34px;
+  font-weight: 700;
+  font-family: var(--font-family);
 }
 .dashboard .banner:first-child .firstBox .content div h5 {
-  color: #ff008d;
+  color: #ff0000;
+  font-size: 30px;
+  font-weight: 700;
+  font-family: var(--font-family);
+  text-transform: capitalize;
 }
 .dashboard .banner:first-child .firstBox .content p {
-  font-size: 16px;
+  font-size: 20px;
+  font-weight: 550;
+  color: #2e2c2c;
+  font-family: var(--font-family);
 }
 .dashboard .banner:first-child .secondBox {
   background: #3939d9f2;
   color: #fff;
 }
+.dashboard .banner:first-child .wildBox{
+  background: #fffffff2;
+  color: #004022;
+}
 .dashboard .banner:first-child .thirdBox {
   color: #ff008d;
-  background: #fff;
+  background: #ffffff;
 }
 .dashboard .banner:first-child .secondBox,
 .dashboard .banner:first-child .thirdBox {
   flex: 1;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 20px 25px;
   display: flex;
   flex-direction: column;
@@ -389,50 +402,125 @@ body {
   margin-bottom: 20px;
   color: #111;
 }
-.dashboard .banner table {
-  width: 100%;
-  color: #111;
-  font-size: 20px;
-}
-.dashboard .banner table select {
-  font-size: 20px;
-  border: none;
-  width: 100%;
-  font-weight: 600;
-}
-.dashboard table td svg{
+
+.analytic{
+  margin: 10px 0;
+  height: fit-content;
   display: flex;
-  margin: 0 auto;
+  flex-direction: row;
+  width: 100%;
+  /* background-color: #ecf7f2; */
+  gap: 20px;
+  flex-wrap: wrap;
+  border-radius: 10px;
 }
-.dashboard table td .green{
-  font-size: 20px;
-  color: #16a34a;
+
+.analytic .analytic-content{
+  display: flex;
+  /* width: inherit; */
+  justify-content: space-between;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
-.dashboard table td .red{
-  font-size: 20px;
-  color: #dc2626;
+
+.analytic .analytic-content .analyticBox{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0 12px;
+  font-size: 1.5rem;
+  text-align: center;
 }
-.dashboard .banner table select:focus {
-  outline: none;
+
+.analyticBox_name{
+  display: flex;
+  justify-content: start;
 }
-.dashboard .banner table .value-pending {
-  color: #eab308;
+
+.analyticBox_name h4{
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-blog);
 }
-.dashboard .banner table .value-accepted {
-  color: #16a34a;
+
+
+.table {
+  border-radius: 20px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
-.dashboard .banner table .value-rejected {
-  color: #dc2626;
+
+.table:first-child {
+  height: fit-content;
+  /* background: #ff0101;
+  color: #fff; */
 }
-.dashboard .banner table thead {
-  text-align: justify;
-  padding: 12px 0;
+
+.table h5 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
 }
-.dashboard .banner table thead th {
-  padding: 12px 0;
+
+.table table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-.dashboard .banner table tbody td {
-  padding: 12px 0;
+
+.table th,
+.table td {
+  padding: 16px;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: left;
+}
+
+.table th {
+  background-color: #ececec;
+  color: #444;
+  font-weight: bold;
+}
+
+.table tr:hover {
+  background-color: #f8f8f8;
+}
+
+.table td:last-child {
+  text-align: left;
+}
+
+@media (max-width: 767px) {
+  .table th,
+  .table td {
+    padding: 12px;
+  }
+
+  .table h5 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 1020px) {
+  .dashboard {
+    height: fit-content;
+  }
+
+  .table .firstBox {
+    flex-direction: column;
+  }
+
+  .table .content {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+
+  .table .firstBox img {
+    width: 100%;
+    height: auto;
+  }
 }
 @media (max-width: 1376px) {
   .dashboard .banner:first-child .firstBox .content div,

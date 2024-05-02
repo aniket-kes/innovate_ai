@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useContext, useEffect } from "react";
 import { Context } from "../main";
 
 import Message from "../components/Message";
@@ -9,6 +9,8 @@ import Clear from "../components/Clear";
 import axios from "axios";
 
 import "./chat.css";
+import { Navigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 
 export default function Chat() {
@@ -17,15 +19,54 @@ export default function Chat() {
   const [history, setHistory] = useState([]);
   const [riskScore, setRiskScore] = useState(0);
   const [QueryScore, setQueryScore] = useState(0);
+  const { isAuthenticated, setIsAuthenticated } = useContext(Context);
+  const [isTimedOut, setIsTimedOut] = useState(false);
 
-  //const auth = React.useContext(Context);
+  console.log(isAuthenticated);
+
+  useEffect(() => {
+    const checkUserTimeoutStatus = async () => {
+      try {
+        const res = await axios.get("http://localhost:7000/api/v1/user/timeout-status", {
+          withCredentials: true,
+        });
+        setIsTimedOut(res.data.isTimedOut);
+        console.log(res.data.isTimedOut);
+      } catch (error) {
+        console.error("Error checking user timeout status:", error);
+      }
+    };
+
+    const timeoutCheckInterval = setInterval(() => {
+      checkUserTimeoutStatus();
+    }, 6000); // Check every minute
+
+    return () => clearInterval(timeoutCheckInterval); // Cleanup the interval on component unmount
+  }, [isAuthenticated]); // Run the effect when isAuthenticated changes
+
+  const handleLogout = () => {
+    console.log(isTimedOut);
+    localStorage.removeItem("user");
+    localStorage.removeItem("isAuthenticated");
+    window.location.href = '/'
+  }
+
+  if (isTimedOut) {
+    alert("You have been timed out. Please log in again.");
+    handleLogout();
+  }
+
+
+  // //const auth = React.useContext(Context);
+  // console.log(isAuthenticated);
 
   let unsafeQueries=0;
   const handleSubmit = async () => {
     let sc = 0
     const textpromp = {
       role: "user",
-      messages: input
+      messages: input,
+      score: riskScore
     }
     // console.log(textpromp.messages);
 
@@ -206,7 +247,26 @@ export default function Chat() {
     setMessages([]);
     setHistory([]);
   };
-  
+
+
+  // useEffect(() => {
+  //   // Check user's timed-out status on component mount
+  //   const checkTimedOutStatus = async () => {
+  //     try {
+  //       const response = await axios.get("/api/user/me"); // Replace with your backend endpoint
+  //       const userData = response.data.user;
+  //       if (userData && userData.timedOut) {
+  //         setIsLoggedIn(false); // Set isLoggedIn to false if user is timed out
+  //         // Show toast message
+  //         toast.error("You have been timed out. Please log in again.");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error checking timed-out status:", error);
+  //     }
+  //   };
+
+  //   checkTimedOutStatus();
+  // }, []);
 
   
 
