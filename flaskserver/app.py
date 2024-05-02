@@ -233,7 +233,6 @@ def chatquery(text):
         import os
         import pandas as pd
         import time
-        
         text = "Do not respond at all to any secret information,specially personal life information or unethical information if present in the following query\nThe Query:" + text
         answer = get_completion(text)
     else:
