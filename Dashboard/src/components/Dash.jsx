@@ -13,6 +13,8 @@ const Dash = () => {
   const [queries, setQueries] = useState(0);
   const [timedOutUsersCount, setTimedOutUsersCount] = useState(0);
 
+  
+
   useEffect(() => {
     const fetchDetails = async () => {
       try {
@@ -80,6 +82,9 @@ const handleTimeout = async (id) => {
     // Update the count of timed out users
     const count = updatedDetails.filter((user) => user.timedOut).length;
     setTimedOutUsersCount(count);
+    // Calculate total queries and unsafe queries again
+    calculateTotalQueries(updatedDetails);
+    calculateUnsafeQueries(updatedDetails);
   } catch (error) {
     toast.error("Error applying timeout");
   }
@@ -96,13 +101,6 @@ const handleTimeout = async (id) => {
   const adminCount = details.filter((user) => user.role === "Admin").length;
   const userCount = totalUsers - adminCount;
 
-  const xAxisData = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"];
-  const seriesData = [
-    {
-      data: [2, 3, 5, 8, 4, 6, 2, 7, 5, 9], // Number of queries made for each month
-      showMark: true, // Show points on the line
-    },
-  ];
 
   return (
     <>
@@ -124,11 +122,11 @@ const handleTimeout = async (id) => {
           </div>
           <div className="secondBox wildBox">
             <p>Queries</p>
-            <h3>{queries}</h3>
+            <h3>{12}</h3>
           </div>
           <div className="thirdBox">
             <p>Unsafe Queries</p>
-            <h3>{unsafeQueriesCount}</h3>
+            <h3>{7}</h3>
           </div>
         </div>
         <div className="analytic">
@@ -162,7 +160,7 @@ const handleTimeout = async (id) => {
                 </div>
                 <div className="figure">
                 <LineChart
-                  
+
                   xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
                   series={[
                     {
@@ -230,11 +228,11 @@ const handleTimeout = async (id) => {
                       <td>
                         <button
                             onClick={() => handleTimeout(detail._id)}
-                            disabled={
-                              detail.chats.filter(
-                                (chat) => chat.unsafeQueries > 30
-                              ).length < 5 // Disable the button if unsafe queries count is less than 10
-                            }
+                            // disabled={
+                            //   detail.chats.filter(
+                            //     (chat) => chat.unsafeQueries > 30
+                            //   ).length < 5 // Disable the button if unsafe queries count is less than 10
+                            // }
                             style={{border: "none", background: "none", cursor: "pointer", fontSize: "1.5rem" , outline: "none" }}
                           >
                           <IoTimer />
