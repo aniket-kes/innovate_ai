@@ -6,7 +6,8 @@ import { Context } from "../main";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const { isAuthenticated, setIsAuthenticated } = useContext(Context);
+  // const { isAuthenticated, setIsAuthenticated } = useContext(Context);
+  const [ isAuthenticated, setIsAuthenticated ] = useState(false);
   const [user, setUser] = useState({});
 
   const [firstName,setFirstName]=useState("");
@@ -20,6 +21,7 @@ const Register = () => {
   const handleRegistration = async (e) => {
     e.preventDefault();
     try {
+      console.log({firstName,lastName,email,password});
       await axios
       .post(
         "http://localhost:7000/api/v1/user/user/register",

@@ -122,11 +122,11 @@ const handleTimeout = async (id) => {
           </div>
           <div className="secondBox wildBox">
             <p>Queries</p>
-            <h3>{12}</h3>
+            <h3>{queries}</h3>
           </div>
           <div className="thirdBox">
             <p>Unsafe Queries</p>
-            <h3>{7}</h3>
+            <h3>{unsafeQueriesCount}</h3>
           </div>
         </div>
         <div className="analytic">
@@ -215,7 +215,7 @@ const handleTimeout = async (id) => {
                 details.map((detail) => (
                   // Filter user information if the role is not admin
                   detail.role !== "Admin" && (
-                    <tr key={detail._id}>
+                    <tr key={detail._id} style={{ backgroundColor: detail.timedOut ? "rgb(235,0,0)" : "" }}>
                       <td>{detail.firstName}</td>
                       {/* <td>{detail.lastName}</td> */}
                       <td>{detail.role}</td>
@@ -228,11 +228,11 @@ const handleTimeout = async (id) => {
                       <td>
                         <button
                             onClick={() => handleTimeout(detail._id)}
-                            // disabled={
-                            //   detail.chats.filter(
-                            //     (chat) => chat.unsafeQueries > 30
-                            //   ).length < 5 // Disable the button if unsafe queries count is less than 10
-                            // }
+                            disabled={
+                              detail.chats.filter(
+                                (chat) => chat.unsafeQueries > 30
+                              ).length < 5 // Disable the button if unsafe queries count is less than 10
+                            }
                             style={{border: "none", background: "none", cursor: "pointer", fontSize: "1.5rem" , outline: "none" }}
                           >
                           <IoTimer />

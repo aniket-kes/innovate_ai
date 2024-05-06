@@ -14,4 +14,8 @@
     outline: none;
     background: none;
   }
+
+  .highlighted-row {
+    background-color: #981a1a; /* Change to your desired highlight color */
+  }
   

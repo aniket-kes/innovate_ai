@@ -25,6 +25,8 @@ const Messages = () => {
     };
   fetchMessages();
   }, []);
+
+  console.log(users.length)
   // if (!isAuthenticated) {
   //   return <Navigate to={"/login"} />;
   // }
