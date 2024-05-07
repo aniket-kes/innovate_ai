@@ -1,0 +1,17 @@
+.timer-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    outline: none;
+  }
+  
+  .disabled-timer-button {
+    border: none;
+    background-color: lightgray; /* Change the background color to grayish */
+    cursor: not-allowed;
+    font-size: 1.5rem;
+    outline: none;
+    background: none;
+  }
+

@@ -21,6 +21,7 @@ function Navbar() {
   const loggedInUser = localStorage.getItem("user");
   const handleLogout = () => {
     localStorage.removeItem("user");
+    localStorage.removeItem("isAuthenticated");
     window.location.href = '/login'
   }
   return (

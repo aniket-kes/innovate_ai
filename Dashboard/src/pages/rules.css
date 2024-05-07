@@ -1,7 +1,7 @@
 .gpt3__whatgpt3 {
     left:120px;
     width: -webkit-fill-available;
-    height: -webkit-fill-available;
+    /* height: -webkit-fill-available; */
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -95,6 +95,10 @@
     font-weight: 500;
     font-size: 18px;
     line-height: 25px;
+}
+
+*{
+    overflow-x: visible;
 }
 
 

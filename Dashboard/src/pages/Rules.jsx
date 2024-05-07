@@ -143,7 +143,7 @@ function Rules() {
           </div> */}
           
         </div>
-        <div className='rules-each'>
+        {/* <div className='rules-each'>
           <div className="content">
           {fileName && fileName.map((file, index) => (
             <div key={index}>
@@ -158,7 +158,69 @@ function Rules() {
             </div>
       ))}
           </div>
+        </div> */}
+        <div class="rules-container">
+        {fileName && fileName.map((file, index) => (
+            visibleContent === file && (
+              
+              rules[index].map((rule, idx) => (
+                <div class="rules-each" key={idx}>
+            <div class="header">
+              <h3><span class="rule-number">{`Rule ${idx + 1}`}</span></h3>
+              <span class="delete-button">
+              <center>Delete</center></span>
+            </div>
+            <div class="content">
+              <p class="customcolorp">{`${rule}`}</p>
+            </div>
+          </div>
+        ))
+            )
+      ))}
         </div>
+
+<style>
+{`
+*{  
+    overflow-x: visible;
+}
+
+    .rules-container {
+        {/* display: flex; */}
+        flex-direction: column;
+        gap: 10px; /* Adjust the gap as needed */
+    }
+
+    .rules-each {
+        background-color:white;
+        border: 1px solid #ccc;
+        padding: 10px;
+        display:flow;
+        margin-top:15px;
+        margin-left:0;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom:5px;
+    }
+
+    .rule-number {
+        font-weight: bold;
+    }
+
+    .delete-button {
+        border-radius:5px;
+        width:60px;
+        background-color:lightgrey;
+        cursor: pointer;
+    }
+    `
+}
+</style>
+
       </div>
     </div> 
   )

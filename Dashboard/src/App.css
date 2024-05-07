@@ -40,9 +40,9 @@ body {
   margin-left: 120px;
   background: #e5e5e5;
   padding: 40px;
-  height: 100vh;
-  border-top-left-radius: 50px;
-  border-bottom-left-radius: 50px;
+  /* height: 100vh; */
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
 @media (max-width: 1208px) {
   .page {
@@ -60,7 +60,7 @@ body {
     width: 100%;
   }
 }
-.form-title{
+/* .form-title{
   font-size: 1.75rem;
   color: #111;
   margin-bottom: 30px;
@@ -172,7 +172,140 @@ body {
   .add-admin-form {
     padding: 30px 0;
   }
+} */
+/* Updated CSS for AddNewAdmin component */
+
+/* Updated CSS for AddNewAdmin component */
+
+/* Particle animation keyframes */
+@keyframes particles {
+  from {
+    transform: translateY(-50%);
+  }
+  to {
+    transform: translateY(100%);
+  }
 }
+
+.form-title {
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 30px;
+}
+
+.form-component {
+  position: relative; /* Relative positioning for particle animation */
+  padding: 60px;
+  min-height: 100vh;
+  background-color: #1a1a2e; /* Dark blue background color */
+  display: flex;
+  flex-direction: column; /* Arrange items in a single column */
+  justify-content: center;
+  align-items: center;
+  animation: gradientAnimation 15s ease infinite alternate; /* Background animation */
+}
+
+/* Background animation keyframes */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%; /* Initial background position */
+  }
+  100% {
+    background-position: 100% 50%; /* Final background position */
+  }
+}
+
+.particles {
+  position: absolute; /* Absolute positioning for particles */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1; /* Move particles behind other content */
+  pointer-events: none; /* Allow clicks to pass through particles */
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background-color: #fff; /* Particle color */
+  border-radius: 50%; /* Circular particles */
+  animation: particles 10s linear infinite; /* Particle animation */
+}
+
+.form-component form {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column; /* Arrange items in a single column */
+}
+
+.form-component form div {
+  margin-bottom: 20px; /* Space between input fields */
+  position: relative; /* For label positioning */
+}
+
+.form-component form label {
+  color: #fff; /* Label color */
+  margin-bottom: 5px;
+  position: absolute; /* Position labels */
+  top: 50%; /* Align labels vertically */
+  left: 20px; /* Offset labels */
+  transform: translateY(-50%); /* Center labels vertically */
+  transition: all 0.3s ease;
+}
+
+.form-component form input,
+.form-component form button {
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.form-component form input:focus,
+.form-component form input:valid,
+.form-component form textarea:focus,
+.form-component form textarea:valid {
+  border: 2px solid #3498db;
+  box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
+}
+
+.form-component form input:focus + label,
+.form-component form input:valid + label,
+.form-component form textarea:focus + label,
+.form-component form textarea:valid + label {
+  top: 8px;
+  left: 20px;
+  font-size: 0.8rem;
+  color: #3498db;
+  transition: all 0.3s ease;
+}
+
+.form-component form button {
+  margin-top: 20px;
+  background: linear-gradient(135deg, #3498db, #2980b9); /* Gradient button background */
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none; /* Remove button outline */
+}
+
+.form-component form button:hover {
+  transform: translateY(-2px); /* Move button slightly up on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow on hover */
+}
+
+@media (max-width: 767px) {
+  .form-component {
+    padding: 30px;
+  }
+}
+
 
 .dashboard {
   display: flex;
@@ -180,7 +313,7 @@ body {
   gap: 20px;
 }
 .dashboard .banner:first-child {
-  height: 35vh;
+  /* height: 35vh; */
   display: flex;
   gap: 20px;
 }
@@ -188,8 +321,8 @@ body {
   flex: 2;
   display: flex;
   align-items: center;
-  border-radius: 20px;
-  background: #b5b5ff;
+  border-radius: 10px;
+  background: #b8b8db;
   padding: 20px 20px 0 10px;
 }
 .dashboard .banner:first-child .firstBox img {
@@ -208,25 +341,38 @@ body {
 .dashboard .banner:first-child .firstBox .content div p {
   margin-right: 10px;
   font-size: 34px;
+  font-weight: 700;
+  font-family: var(--font-family);
 }
 .dashboard .banner:first-child .firstBox .content div h5 {
-  color: #ff008d;
+  color: #ff0000;
+  font-size: 30px;
+  font-weight: 700;
+  font-family: var(--font-family);
+  text-transform: capitalize;
 }
 .dashboard .banner:first-child .firstBox .content p {
-  font-size: 16px;
+  font-size: 20px;
+  font-weight: 550;
+  color: #2e2c2c;
+  font-family: var(--font-family);
 }
 .dashboard .banner:first-child .secondBox {
   background: #3939d9f2;
   color: #fff;
 }
+.dashboard .banner:first-child .wildBox{
+  background: #fffffff2;
+  color: #004022;
+}
 .dashboard .banner:first-child .thirdBox {
   color: #ff008d;
-  background: #fff;
+  background: #ffffff;
 }
 .dashboard .banner:first-child .secondBox,
 .dashboard .banner:first-child .thirdBox {
   flex: 1;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 20px 25px;
   display: flex;
   flex-direction: column;
@@ -256,50 +402,138 @@ body {
   margin-bottom: 20px;
   color: #111;
 }
-.dashboard .banner table {
-  width: 100%;
-  color: #111;
-  font-size: 20px;
-}
-.dashboard .banner table select {
-  font-size: 20px;
-  border: none;
-  width: 100%;
-  font-weight: 600;
-}
-.dashboard table td svg{
+
+.analytic{
+  margin: 10px 0;
+  height: fit-content;
   display: flex;
-  margin: 0 auto;
+  flex-direction: row;
+  width: 100%;
+  /* background-color: #ecf7f2; */
+  gap: 20px;
+  flex-wrap: wrap;
+  border-radius: 10px;
 }
-.dashboard table td .green{
-  font-size: 20px;
-  color: #16a34a;
+
+.analytic .analytic-content{
+  display: flex;
+  /* width: inherit; */
+  /* justify-content: space-between; */
+  /* align-items: center; */
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
-.dashboard table td .red{
-  font-size: 20px;
-  color: #dc2626;
+
+.analytic .analytic-content .analyticBox{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0 12px;
+  font-size: 1.5rem;
+  text-align: center;
 }
-.dashboard .banner table select:focus {
-  outline: none;
+
+.content-1{
+  flex: 0.84;
 }
-.dashboard .banner table .value-pending {
-  color: #eab308;
+
+.content-3{
+  flex: 0.4;
 }
-.dashboard .banner table .value-accepted {
-  color: #16a34a;
+
+.analyticBox .figure{
+  margin:auto 0px;
 }
-.dashboard .banner table .value-rejected {
-  color: #dc2626;
+
+.analyticBox_name{
+  display: flex;
+  justify-content: start;
 }
-.dashboard .banner table thead {
-  text-align: justify;
-  padding: 12px 0;
+
+.analyticBox_name h4{
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-blog);
 }
-.dashboard .banner table thead th {
-  padding: 12px 0;
+
+
+.table {
+  border-radius: 20px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
-.dashboard .banner table tbody td {
-  padding: 12px 0;
+
+.table:first-child {
+  height: fit-content;
+  /* background: #ff0101;
+  color: #fff; */
+}
+
+.table h5 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.table table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.table th,
+.table td {
+  padding: 16px;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: left;
+}
+
+.table th {
+  background-color: #ececec;
+  color: #444;
+  font-weight: bold;
+}
+
+.table tr:hover {
+  background-color: #f8f8f8;
+}
+
+.table td:last-child {
+  text-align: left;
+}
+
+@media (max-width: 767px) {
+  .table th,
+  .table td {
+    padding: 12px;
+  }
+
+  .table h5 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 1020px) {
+  .dashboard {
+    height: fit-content;
+  }
+
+  .table .firstBox {
+    flex-direction: column;
+  }
+
+  .table .content {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+
+  .table .firstBox img {
+    width: 100%;
+    height: auto;
+  }
 }
 @media (max-width: 1376px) {
   .dashboard .banner:first-child .firstBox .content div,
@@ -485,7 +719,7 @@ body {
   }
 }
 
-.messages h1 {
+/* .messages h1 {
   color: #3939d9f2;
   margin-bottom: 30px;
   font-size: 2.3rem;
@@ -512,7 +746,164 @@ body {
 }
 .messages .banner .card div p span {
   font-weight: 500;
+} */
+/* Main container for messages */
+
+
+.messages {
+  font-family: Arial, sans-serif;
+  padding: 20px;
 }
+
+/* Title */
+.messages h1 {
+  color: #2c3e50;
+  font-size: 2.3rem;
+  margin-bottom: 20px;
+}
+
+/* Banner container */
+.messages .banner {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Individual message card */
+.messages .banner .card {
+  background: #2c3e50;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Inner container for text content */
+.messages .banner .card div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Styling for paragraph and span */
+.messages .banner .card div p {
+  margin: 0;
+  font-weight: 700;
+}
+
+.messages .banner .card div p span {
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+/* Styling for chat messages */
+.messages .banner .card div .chat {
+  padding-left: 20px;
+  border-left: 3px solid #2c3e50;
+  margin-top: 10px;
+}
+
+/* Additional styles for better readability */
+.messages .banner .card div .chat p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+/* Styling for names and emails */
+.messages .banner .card div .name,
+.messages .banner .card div .email {
+  color: #2c3e50;
+}
+/* Main container for messages */
+.messages {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #2c3e50; /* Light gray background color */
+}
+
+/* Title */
+.messages h1 {
+  color: #3939d9f2; /* Blue title color */
+  font-size: 2.3rem;
+  margin-bottom: 20px;
+}
+
+/* Banner container */
+.messages .banner {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Individual message card */
+.messages .banner .card {
+  background: #2c3e50;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Inner container for text content */
+.messages .banner .card div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Styling for paragraph and span */
+.messages .banner .card div p {
+  margin: 0;
+  font-weight: 700;
+}
+
+.messages .banner .card div p span {
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+/* Styling for chat messages */
+.messages .banner .card div .chat-content {
+  overflow: hidden;
+  color: #333; /* Dark text color for chat messages */
+}
+
+/* Styling for "View More" link */
+.messages .banner .card div .view-more {
+  color:#2c3e50; /* Blue link color */
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+/* Hide the "View More" link by default */
+.messages .banner .card div .view-more.hidden {
+  display: none;
+}
+/* CSS for Messages component */
+
+.page.messages {
+  background-color: #f0f0f0; /* Light gray background color for the page */
+}
+
+.messages .banner .card {
+  background: #e0e8f0; /* Soothing blue-gray background color for message cards */
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for "View More" link */
+.messages .banner .card div .view-more {
+  color: #007bff; /* Blue link color */
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+/* Hide the "View More" link by default */
+.messages .banner .card div .view-more.hidden {
+  display: none;
+}
+
+
 
 .add-doctor-form {
   width: 100%;

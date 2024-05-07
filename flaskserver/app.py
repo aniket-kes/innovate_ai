@@ -46,13 +46,63 @@ def extract_rules(text):
     rules = re.findall(r'\*\*(.*?)\*\*', text)
     return rules
 
+import random
+def anonymize_text(text):
+        doc = nlp(text)
+        anonymized_tokens = []
+        substitution_dict = {}
+        for token in doc:
+            if token.ent_type_ == "ORG":
+                dummy_string = "Mycompany" + str(random.randint(1000, 9999))
+                anonymized_tokens.append(dummy_string)
+                substitution_dict[dummy_string] = token.text
+            elif token.ent_type_ == "NORP":
+                dummy_string = "Nation" + str(random.randint(1000, 9999))
+                anonymized_tokens.append(dummy_string)
+                substitution_dict[dummy_string] = token.text
+            elif token.ent_type_ == "FACILITY":
+                dummy_string = "place" + str(random.randint(1000, 9999))
+                anonymized_tokens.append(dummy_string)
+                substitution_dict[dummy_string] = token.text
+            elif token.ent_type_ == "PER":
+                dummy_string = "person" + str(random.randint(1000, 9999))
+                anonymized_tokens.append(dummy_string)
+                substitution_dict[dummy_string] = token.text
+            elif token.ent_type_ == "FAC":
+                dummy_string = "bulding" + str(random.randint(1000, 9999))
+                anonymized_tokens.append(dummy_string)
+                substitution_dict[dummy_string] = token.text
+            elif token.ent_type_ == "GPE":
+                dummy_string = "Country" + str(random.randint(1000, 9999))
+                anonymized_tokens.append(dummy_string)
+                substitution_dict[dummy_string] = token.text
+            elif token.ent_type_ == "RELIGION":
+                dummy_string = "religion" + str(random.randint(1000, 9999))
+                anonymized_tokens.append(dummy_string)
+                substitution_dict[dummy_string] = token.text
+            elif token.like_email:
+                anonymized_tokens.append("dummy_email")
+            elif token.like_url:
+                anonymized_tokens.append("dummy_url")
+            else:
+                anonymized_tokens.append(token.text)
+        return ' '.join(anonymized_tokens), substitution_dict
+
+filterchoice = 1
 @app.route("/filtertext", methods=["POST"])
 def filtertext():
     print('filter text entered')
+    global filterchoice
     data = request.get_json(force=True)
     filter_text = data['text']
     #input_text_risk_score = int(risk_score(filter_text))
-    processed_text = process_filter_text(filter_text)
+    if filterchoice==1:
+        processed_text = process_filter_text(filter_text)
+    elif filterchoice==2:
+        processed_text,subdict = anonymize_text(remove_special_characters(process_filter_text(filter_text)))
+        print("Mapping Dictionary for Query:",subdict)
+    else:
+        processed_text = "Text Error"
     #output_text_risk_score = int(risk_score(processed_text))
     #print("Output Risk Score:",output_text_risk_score)
     results = remove_special_characters(processed_text)
@@ -153,24 +203,57 @@ def llmanswer():
     results = remove_special_characters(results)
     return jsonify(results), 200, {'Content-Type':'application/json'}
 
+import openai
+def get_completion(prompt, model="gpt-3.5-turbo"):
+    messages = [{"role": "user", "content": prompt}]
+    response = openai.ChatCompletion.create(
+    model=model,
+    messages=messages,
+    temperature=0,
+    )
+    return response.choices[0].message["content"]
+
+@app.route("/apichoice",methods=['POST'])
+def apichoice():
+    data = request.get_json(force=True)
+    text = data['APIChoice']
+    global filterchatchoice
+    if text=='ChatGPT':
+        filterchatchoice = 'b'
+        print("Current API : ChatGPT")
+    else:
+        filterchatchoice = 'a'
+        print("Current API : Google-Palm")
+    results = "API choice changed"
+    return jsonify(results), 200, {'Content-Type':'application/json'}
+
+filterchatchoice = 'a'
 def chatquery(text):
-    api_key = 'AIzaSyAvBSb1jIq0sOc9RhmRM-ZCiI7SV9_Ph7I' # put your API key here
-    from langchain_google_genai import GoogleGenerativeAI
-    llm = GoogleGenerativeAI(model="models/text-bison-001", google_api_key=api_key, temperature=0)
+    if filterchatchoice=='b':
+        import os
+        import pandas as pd
+        import time
+        openai.api_key = os.environ.get("OPENAI_API_KEY")
+        text = "Do not respond at all to any secret information,specially personal life information or unethical information if present in the following query\nThe Query:" + text
+        answer = get_completion(text)
+    else:
+        api_key = 'AIzaSyAvBSb1jIq0sOc9RhmRM-ZCiI7SV9_Ph7I' # put your API key here
+        from langchain_google_genai import GoogleGenerativeAI
+        llm = GoogleGenerativeAI(model="models/text-bison-001", google_api_key=api_key, temperature=0)
 
-    template = """
-    You are an artificial intelligence assistant to a company employee. You are asked to answer questions. The assistant gives helpful, detailed, and polite answers to the user's questions.
-    {question}
-    """
+        template = """
+        You are an artificial intelligence assistant to a company employee. You are asked to answer questions. The assistant gives helpful, detailed, and polite answers to the user's questions.
+        {question}
+        """
 
-    from langchain import PromptTemplate, LLMChain
+        from langchain import PromptTemplate, LLMChain
 
-    prompt = PromptTemplate(template=template, input_variables=["question"])
-    llm_chain = LLMChain(prompt=prompt, llm=llm, verbose=True)
+        prompt = PromptTemplate(template=template, input_variables=["question"])
+        llm_chain = LLMChain(prompt=prompt, llm=llm, verbose=True)
 
-    que = text
+        que = text
 
-    answer = llm_chain.run(question=que)
+        answer = llm_chain.run(question=que)
     return answer
 
 totalrules = []
