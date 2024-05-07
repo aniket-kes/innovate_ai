@@ -77,9 +77,13 @@ const handleTimeout = async (id) => {
         : detail
     );
     setDetails(updatedDetails);
+    calculateUnsafeQueries(data.user); //Calculate unsafe queries
+        calculateTotalQueries(data.user); //Calculate total queries
+        countTimedOutUsers(data.user);
     // Update the count of timed out users
     const count = updatedDetails.filter((user) => user.timedOut).length;
     setTimedOutUsersCount(count);
+    
   } catch (error) {
     toast.error("Error applying timeout");
   }
@@ -260,11 +264,11 @@ const handleTimeout = async (id) => {
                       <td>
                         <button
                             onClick={() => handleTimeout(detail._id)}
-                            disabled={
-                              detail.chats.filter(
-                                (chat) => chat.unsafeQueries > 30
-                              ).length < 5 // Disable the button if unsafe queries count is less than 10
-                            }
+                            // disabled={
+                            //   detail.chats.filter(
+                            //     (chat) => chat.unsafeQueries > 30
+                            //   ).length <= 0 // Disable the button if unsafe queries count is less than 10
+                            // }
                             style={{border: "none", background: "none", cursor: "pointer", fontSize: "1.5rem" , outline: "none" }}
                           >
                           <IoTimer />
